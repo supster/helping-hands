@@ -1,0 +1,56 @@
+@import "bootstrap";
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* forms */
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 400px;
+  height: auto;
+  margin-bottom: 15px;
+  @include box_sizing;  
+}
+
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .control-group.error;
+}
+
+#map-canvas { 
+  width: 600px; 
+  height: 300px;
+  border: 1px solid
+}
+
+#event_time_zone { 
+  width:400px; 
+  @extend .controls; 
+}
+
+/* Index*/
+.lists {
+  list-style: none;
+  margin: 0;
+  li {
+    vertical-align: top;
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+

@@ -1,0 +1,71 @@
+require 'csv'
+
+namespace :db do
+ desc "upload CSV data" 
+ task populate: :environment do
+    Agency.delete_all
+    Service.delete_all
+    Program.delete_all
+    Location.delete_all
+
+    make_Agency
+    #make_GED "#{Rails.root}/lib/tasks/GED_service.csv", 1
+    #make_Work "#{Rails.root}/lib/tasks/Workforce_1_Career_Center_Locations3.csv", 2
+    #make_courses
+    #make_reviews
+ end
+ 
+ #populate
+ def make_Agency
+   agency = Agency.create!(name: "District 79 - NYC Department of Education")
+   service = Service.create!(name: "High School Alternatives")
+   service.programs.create!(name: "Alternative Schools & Programs", agency_id: agency.id,
+                            url: "http://schools.nyc.gov/ChoicesEnrollment/AlternativesHS/Referral/default.htm")
+   make_Agency_locations(agency.id, "#{Rails.root}/lib/tasks/Referral_Centers_For_High_School_Alternatives.csv")
+
+   agency = Agency.create!(name: "Office of Adult & Continuing Education")
+   service = Service.create!(name: "Adult GED")
+   service.programs.create!(name: "High School Equivalency (GED)", agency_id: agency.id,
+                            url: "http://schools.nyc.gov/ChoicesEnrollment/AdultEd/ProgramOfferings/default.htm")
+   make_Agency_locations(agency.id, "#{Rails.root}/lib/tasks/OACE.csv")
+ end
+
+ def make_Agency_locations(agency_id, filename)
+    csv_contents = CSV.parse(File.read(filename), {:converters => :all, headers: true} ) do |row|
+    location = Location.new(agency_id: agency_id, name: row[0], address: row[1], city: row[2], 
+                         state: row[3], zip: row[4], phone: row[5], description: "")
+    if location.valid?
+      location.save
+    else
+      location.errors.inspect
+    end
+ end
+
+=begin
+ def make_GED(filename, service_type)
+    csv_contents = CSV.parse(File.read(filename), {:converters => :all, headers: true} ) do |row|
+    service = Service.new(name: row[0], address: row[1], city: row[2], 
+                         state: "NY", phone: row[3], description: "",
+                         url: row[5], service_type: service_type)
+    if service.valid?
+      service.save
+    else
+      service.errors.inspect
+    end
+  end
+ end
+
+ def make_Work(filename, service_type)
+    csv_contents = CSV.parse(File.read(filename), {:converters => :all, headers: true} ) do |row|
+    service = service.new(name: row[0], address: row[1], city: row[2], zip_code: row[3],
+                         state: "NY", phone: row[4], url: row[5], service_type: service_type,
+                         description: "Workforce and career training program")
+    if service.valid?
+      service.save
+    else
+      service.errors.inspect
+    end
+  end
+=end
+ end
+end

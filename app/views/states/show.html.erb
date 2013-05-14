@@ -1,0 +1,33 @@
+<% provide(:title, 'State')%>  
+<div>
+	<h4><%= @state.description.html_safe %></h4>	
+
+	<% if !@programs.nil? %>
+		<% @programs.each do |pro| %>
+			<div style="color: green; font-weight: bold;"><%= pro.name %></div>
+			<div>More information: <%= link_to pro.url, pro.url, target: "blank" %></div>
+			<ul class="lists">
+				<% pro.agency.locations.each do |loc| %>
+				<li>
+					<strong><%= loc.name %></strong><br>
+					<%= render "shared/show_address", address: loc  %>
+					Phone: <%= loc.phone %>
+				</li>
+				<% end %>
+			<ula>
+		<% end %>
+	<% end %>
+
+	<ul>
+		<% @actions.each do |ac| %>
+			<li>
+				<%= if !ac.next_state_id.nil?
+						link_to ac.name,  workflow_state_path(@workflow_id, ac.next_state_id)
+					end 
+				%>
+			</li>
+		<% end %>
+	</ul>
+
+
+</div>

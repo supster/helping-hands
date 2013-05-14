@@ -1,0 +1,13 @@
+<% provide(:title, 'Workflow')%>  
+<div>
+	<h2><%= @workflow.name %></h2>	
+	<table>
+		<% @states.each do |st| %>
+		<tr>
+			<td><%= st.name %></td>
+			<td><%= st.description %></td>
+		</tr>
+		<% end %>
+	</table>
+	
+</div>

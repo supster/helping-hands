@@ -1,0 +1,12 @@
+<% provide(:title, 'Home')%>  
+<div>
+	<h2>Welcome to Helping Hand!</h2>
+	<h3>We help you navigate social benefits.</h3>
+	<h4>Which of the following area do you need help with?</h4>	
+	<ul>
+		<% @area.each do |area| %>
+			<li><%= link_to area.name, workflows_path(area: area.id) %></li>
+		<% end %>
+	</ul>
+	
+</div>

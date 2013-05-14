@@ -1,0 +1,15 @@
+<% provide(:title, 'Workflow')%>  
+<div>
+	<h4>What help do you need?</h4>	
+	<ul>
+		<% @workflows.each do |wf| %>
+			<li><%= if !wf.start_state_id.nil?
+						link_to wf.name,  workflow_state_path(wf, wf.start_state_id) 
+					else
+						wf.name
+					end 
+				%></li>
+		<% end %>
+	</ul>
+	
+</div>
