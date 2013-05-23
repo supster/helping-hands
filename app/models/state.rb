@@ -5,4 +5,6 @@ class State < ActiveRecord::Base
   has_many :actions
 
   validates :name, presence: true, length: { maximum: 255 }  
+
+  
 end

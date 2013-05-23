@@ -1,21 +1,27 @@
-<% provide(:title, 'State')%>  
+<% provide(:title, 'State')%>
 <div>
-	<h4><%= @state.description.html_safe %></h4>	
-
+	<h4><%= @state.description.html_safe %></h4>
 	<% if !@programs.nil? %>
-		<% @programs.each do |pro| %>
-			<div style="color: green; font-weight: bold;"><%= pro.name %></div>
-			<div>More information: <%= link_to pro.url, pro.url, target: "blank" %></div>
-			<ul class="lists">
-				<% pro.agency.locations.each do |loc| %>
-				<li>
-					<strong><%= loc.name %></strong><br>
-					<%= render "shared/show_address", address: loc  %>
-					Phone: <%= loc.phone %>
-				</li>
-				<% end %>
-			<ula>
-		<% end %>
+		<div class="row"/>
+			<div class="span7">
+			<% @programs.each do |pro| %>
+				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
+				<div>More information: <%= link_to pro.url, pro.url, target: "blank" %></div>
+				<ul class="lists">
+					<% pro.agency.locations.each do |loc| %>
+					<li>
+						<strong><%= loc.name %></strong><br>
+						<%= render "shared/show_address", address: loc  %>
+						Phone: <%= loc.phone %>
+					</li>
+					<% end %>
+				</ul>
+			<% end %>
+			</div>
+			<div class="span5">
+				<%= gmaps("markers" => {"data" => @json, "options" => {"custom_infowindow_class" => "white" } }) %> 
+			</div>
+		</div>
 	<% end %>
 
 	<ul>
