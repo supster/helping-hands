@@ -7,8 +7,8 @@ class State < ActiveRecord::Base
 
   validates :name, presence: true, length: { maximum: 255 }  
 
-  def next (action)
-  	action.next_state_id
-  end
+  #def next (action)
+  #	action.next_state_id
+  #end
 
 end

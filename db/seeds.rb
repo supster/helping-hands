@@ -27,8 +27,8 @@ state = State.create(name: "Check Age", description: "Are you 21 or older?", wor
 workflow.start_state_id = state.id
 workflow.save
 
-action1 = Action.new(name: "Yes", description: "21 or older", save: "age: >=21", state_id: state.id, order_no: 0)
-action2 = Action.new(name: "No", description: "Younger than 21", save: "age: <21", state_id: state.id, order_no: 1)
+action1 = Action.new(name: "Yes", description: "21 or older", save_attr: "age: >=21", state_id: state.id, order_no: 0)
+action2 = Action.new(name: "No", description: "Younger than 21", save_attr: "age: <21", state_id: state.id, order_no: 1)
 
 # Older than 21
 state = State.create(name: "Adult Learning Programs", 

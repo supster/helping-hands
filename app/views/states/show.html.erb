@@ -12,33 +12,34 @@
 	<h4><%= @state.description.html_safe %></h4>	
 	<% if @state.action_type.name == "ProgramForm" %>
 		<% if !@programs.nil? %>
-			<% @programs.each do |pro| %>
-				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
-				<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
-				<ul class="lists">
-					<% pro.agency.locations.each do |loc| %>
-					<li>
-						<strong><%= loc.name %></strong><br>
-						<%= render "shared/show_address", address: loc  %>
-						<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
-					</li>
-					<% end %>
-				<ul>
-			<% end %>
+			<div class="row"/>
+				<div class="span7">
+				<% @programs.each do |pro| %>
+					<div style="color: green; font-weight: bold;"><%= pro.name %></div>
+					<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
+					<ul class="lists">
+						<% pro.agency.locations.each do |loc| %>
+							<li>
+								<strong><%= loc.name %></strong><br>
+								<%= render "shared/show_address", address: loc  %>
+								<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
+							</li>
+						<% end %>
+					<ul>
+				<% end %>
+				</div>
+				<div class="span5">
+					<%= gmaps("markers" => {"data" => @json, "options" => {"custom_infowindow_class" => "white" } }) %> 
+				</div>
+			</div>					
 		<% end %>
 	<% elsif @state.action_type.name == "YesNo" %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
 			<%= hidden_field_tag "save" %>
 			<%= hidden_field_tag "next_state_id" %>
 			<% @actions.each do |ac| %>
-				<%= #if !ac.next_state_id.nil?
-					button_tag 	ac.name, onclick: "takeAction('#{ac.next_state_id}','#{ac.save}');", 
-								class: "btn btn-medium btn-primary"
-					#link_to ac.name, workflow_state_path(@workflow_id, ac.next_state_id), class: "btn btn-medium btn-primary"
-				#else
-				#	ac.name
-				#end 
-				%>
+				<%= button_tag 	ac.name, onclick: "takeAction('#{ac.next_state_id}','#{ac.save}');", 
+								class: "btn btn-medium btn-primary" %>
 			<% end %>
 		<% end %>
 	<% elsif @state.action_type.name == "InputForm" %>

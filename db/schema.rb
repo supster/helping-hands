@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130519172434) do
+ActiveRecord::Schema.define(:version => 20130523183741) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130519172434) do
     t.integer  "order_no"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "save_attr"
   end
 
   add_index "actions", ["state_id"], :name => "index_actions_on_state_id"
@@ -61,6 +62,8 @@ ActiveRecord::Schema.define(:version => 20130519172434) do
     t.integer  "agency_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "locations", ["agency_id"], :name => "index_locations_on_agency_id"
