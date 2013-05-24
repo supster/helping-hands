@@ -4,9 +4,9 @@
 	<ul>
 		<% @workflows.each do |wf| %>
 			<li><%= if !wf.start_state_id.nil?
-						link_to wf.name,  workflow_state_path(wf, wf.start_state_id) 
+						link_to wf.description,  workflow_state_path(wf, wf.start_state_id) 
 					else
-						wf.name
+						wf.description
 					end 
 				%></li>
 		<% end %>

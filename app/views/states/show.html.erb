@@ -14,6 +14,7 @@
 </script>
 <% end %>
 <div>
+	<h3><%= @workflow.name %></h3>
 	<h4><%= @state.description.html_safe %></h4>	
 	<% if @state.action_type.name == "ProgramForm" %>
 		<% if !@programs.nil? %>

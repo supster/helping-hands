@@ -111,7 +111,7 @@ action1_citizen = Action.new(name: "Yes", description: "Have US Citizenship", st
 action2 = Action.new(name: "No", description: "Not US Citizen", state_id: state.id, order_no: 1)
 
 #Immigration
-state = State.create(name: "Check Immigration", description: "Are you a Qualified Immigrant? (e.g. Green Card)", workflow_id: workflow.id, action_typ_id: 1)
+state = State.create(name: "Check Immigration", description: "Are you a Qualified Immigrant? (e.g. Green Card)", workflow_id: workflow.id, action_type_id: 1)
 action2.next_state_id = state.id
 action2.save
 
