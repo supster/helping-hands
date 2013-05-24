@@ -1,7 +1,7 @@
 class StatesController < ApplicationController
   def show
-  	#@workflow = Workflow.find(params[:workflow_id])
     @workflow_id = params[:workflow_id]
+    @workflow = Workflow.find(@workflow_id)
     
     if params[:next_state_id].nil?
     	@state = State.find_by_id(params[:id])
@@ -11,20 +11,25 @@ class StatesController < ApplicationController
 
       if !@state.form_name.nil? and @state.form_name == "show_programs"
         @programs = Service.find_by_name(@state.form_param).programs.includes(:agency => :locations)
-        if @programs
-            @programs.each do |program|
-              program.agency.locations.each do |address|
-                @addresses << address
-              end
-            end
+        @programs.each do |program|
+          program.agency.locations.each do |address|
+            @addresses << address
+          end
         end
       end
       @json = @addresses.to_gmaps4rails
+
     else
-        # We should save hidden variable values here
+      # We should save hidden variable values here
 
       if params[:next_state_id] != "" 
-        redirect_to workflow_state_path @workflow_id, params[:next_state_id]
+        if params[:next_state_id] == 0 #End state
+          #calculate Rule
+          @eligible = RuleEngine.calculate(@workflow.name, current_user)
+          redirect_to programs_path service: @eligible.service_id
+        else
+          redirect_to workflow_state_path @workflow_id, params[:next_state_id]
+        end
       else
         render "end_wf"
       end

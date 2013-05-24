@@ -20,8 +20,8 @@ Action.delete_all
 
 area_id = Area.find_by_name("Education").id
 #Education - Finish Highschool
-workflow = Workflow.create(name: "I need help finishing High School.", 
-						 description: "I need help staying in school or getting a GED.", area_id: area_id)
+workflow = Workflow.create(name: "Finishing High School", 
+						 description: "I need help finishing High School.", area_id: area_id)
 
 state = State.create(name: "Check Age", description: "Are you 21 or older?", workflow_id: workflow.id, action_type_id: 1)
 workflow.start_state_id = state.id
@@ -49,24 +49,24 @@ action2.next_state_id = state.id
 action2.save
 
 #Education - Improve my English
-workflow = Workflow.create(name: "I want to improve my English.", 
-						 description: "I want to take English language classes.", area_id: area_id)
+workflow = Workflow.create(name: "Improving My English", 
+						 description: "I want to improve my English.", area_id: area_id)
 
 
 #Education - Learn career and technical skills
-workflow = Workflow.create(name: "I need career training.", 
+workflow = Workflow.create(name: "Career Training", 
 						 description: "I want to learn career and technical skills.", area_id: area_id)
 
 
 #Work - Learn career and technical skills
 area_id = Area.find_by_name("Work").id
-workflow = Workflow.create(name: "I need help finding a job or internship.", 
-						 description: "I want to learn career and technical skills.", area_id: area_id)
+workflow = Workflow.create(name: "Finding a job or internship", 
+						 description: "I need help finding a job or internship.", area_id: area_id)
 
 ## Workflow Number 2 - Medicaid
 area_id = Area.find_by_name("Health").id
-workflow = Workflow.create(name: "I need health insurance.", 
-						 description: "I need help getting health insurance.", area_id: area_id)
+workflow = Workflow.create(name: "Applying for Health Insurance", 
+						 description: "I need health insurance.", area_id: area_id)
 
 #check age
 state = State.create(name: "Check Age", description: "How old are you?", workflow_id: workflow.id, action_type_id: 1)
@@ -111,7 +111,7 @@ action1_citizen = Action.new(name: "Yes", description: "Have US Citizenship", st
 action2 = Action.new(name: "No", description: "Not US Citizen", state_id: state.id, order_no: 1)
 
 #Immigration
-state = State.create(name: "Check Immigration", description: "Are you a Qualified Immigrant? (e.g. Green Card)", workflow_id: workflow.id)
+state = State.create(name: "Check Immigration", description: "Are you a Qualified Immigrant? (e.g. Green Card)", workflow_id: workflow.id, action_typ_id: 1)
 action2.next_state_id = state.id
 action2.save
 
@@ -148,13 +148,23 @@ action1_proof.save
 action1 = Action.create(name: "Yes", description: "Disable", state_id: state.id, order_no: 0) # END
 action2 = Action.new(name: "No", description: "Not Disable", state_id: state.id, order_no: 1)
 
-# Checking income and number of people in the family
-state = State.create(name: "Check Medicaid", 
-				description: "Please enter the following information to determine if you are eligible:",
+# Checking number of people in the family
+state = State.create(name: "Check Household Size", 
+				description: "How many people are in your household?",
 				workflow_id: workflow.id,
-				form_name: "show_input_medicaid", form_param: "", action_type_id: 2)
+				form_name: "show_household", form_param: "", action_type_id: 2)
 action2.next_state_id = state.id
 action2.save
 
+action1 = Action.create(name: "Next", description: "Household Size", save_attr: "household_size:", state_id: state.id, order_no: 0) # END
+# Checking income
+state = State.create(name: "Check Monthly Income", 
+				description: "How much do you earn altogether per month?",
+				workflow_id: workflow.id,
+				form_name: "show_monthly_income", form_param: "", action_type_id: 2)
+action1.next_state_id = state.id
+action1.save
 
+action1 = Action.create(name: "Next", description: "Monthly Income", save_attr: "monthly_income:", state_id: state.id, order_no: 0) # END
+action1.next_state_id = 0 # 0 means we should calculate the rules
 

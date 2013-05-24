@@ -6,6 +6,11 @@
 		$("#save").val(saveAction);
 		//return true;
 	}
+
+	function takeValue(nextStateID, saveAttribute){
+		$("#next_state_id").val(nextStateID);
+		$("#save").val(saveAttribute + $("#input_value").val());
+	}
 </script>
 <% end %>
 <div>
@@ -38,21 +43,22 @@
 			<%= hidden_field_tag "save" %>
 			<%= hidden_field_tag "next_state_id" %>
 			<% @actions.each do |ac| %>
-				<%= button_tag 	ac.name, onclick: "takeAction('#{ac.next_state_id}','#{ac.save}');", 
+				<%= button_tag 	ac.name, onclick: "takeAction('#{ac.next_state_id}','#{ac.save_attr}');", 
 								class: "btn btn-medium btn-primary" %>
 			<% end %>
 		<% end %>
 	<% elsif @state.action_type.name == "InputForm" %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
-			<% if @state.form_name = "show_household" %>
-				How many people are in your household?
-				<%= select_tag :household_size, 
+			<% if @state.form_name == "show_household" %>
+				<%= select_tag "input_value", 
 				options_for_select([[1,1], [2,2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9]]) %><br/>
-			<% elsif @state.form_name = "show_monthly_income" %>
-				How much do you earn altogether per month?
-				<%= text_field_tag :monthly_income %>
+			<% elsif @state.form_name == "show_monthly_income" %>
+				<%= text_field_tag "input_value" %><br/>
 			<% end %>
-			<%= button_tag "Next", class: "btn btn-medium btn btn-primary" %>
+			<%= hidden_field_tag "save" %>
+			<%= hidden_field_tag "next_state_id" %>
+			<%= button_tag "Next", onclick: "takeValue('#{@actions[0].next_state_id}','#{@actions[0].save_attr}');",
+							class: "btn btn-medium btn btn-primary" if @actions.count > 0 %>
 		<% end %>
 	<% end %>
 </div>
