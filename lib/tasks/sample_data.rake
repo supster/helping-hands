@@ -33,7 +33,7 @@ namespace :db do
  def make_Agency_locations(agency_id, filename)
     csv_contents = CSV.parse(File.read(filename), {:converters => :all, headers: true} ) do |row|
     location = Location.new(agency_id: agency_id, name: row[0], address: row[1], city: row[2], 
-                         state: row[3], zip: row[4], phone: row[5], description: "")
+                         state: row[3], zip: row[4], phone: row[5], latitude: row[7], longitude: row[8])
     if location.valid?
       location.save
     else
