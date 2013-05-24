@@ -1,50 +1,5 @@
 <% provide(:title, @program.name)%>
 <% content_for :head do %>
-	<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCVyEbVVhfHMiI6G4P0SDnxvSCp8bcCMac&sensor=false' %>
-	<script type="text/javascript">
-	
-  	  function codeAddress() {
- 	  	geocoder = new google.maps.Geocoder();
-   		var address = "<%=  @location.address + ' ' + @location.city + ', ' + @location.state + ' ' + @location.zip %>";
-		
-	    geocoder.geocode( { 'address': address }, function(results, status) {
-	      if (status == google.maps.GeocoderStatus.OK) {
-			showMap(results[0]);
-	      } else {
-	        $("#map-canvas").html("Google Geocode was not successful for the following reason: <br> " + status);
-	      }
-	    });
-	  }
-
-	  function showMap(geoCodeResult){
-	    var mapOptions = {
-	      center: geoCodeResult.geometry.location,
-	      zoom: 13,
-	      mapTypeId: google.maps.MapTypeId.ROADMAP,
-	      mapMarker: true
-	    };
-	    
-	    var map = new google.maps.Map(document.getElementById("map-canvas"),
-	        mapOptions);
-    		  	
-        var marker = new google.maps.Marker({
-            map: map, 
-            position: geoCodeResult.geometry.location
-        });	  		  	
-	  }
-	
-	  function initialize() {
-	        
-	  	codeAddress();
-
-	  }
-
-	  function clickDone(){
-	  	alert('done - go to review page')
-	  }
-	  
-	  google.maps.event.addDomListener(window, 'load', initialize);
-	</script>  
 <% end %>
 <div class="container-fluid">
 	<h4>
@@ -57,7 +12,7 @@
 				<%= render "shared/show_address", address: @location  %>
 				<strong>Phone: <%= @location.phone %></strong>
 			</div><br>
-			<div id="map-canvas"></div>
+			<div><%= gmaps("markers" => {"data" => @json, "options" => {"custom_infowindow_class" => "white" } }) %> </div>
 		</div>
 	</div><br><br>
 	<%= link_to "Back", workflow_state_path(params[:workflow_id], params[:id]), class: "btn btn-large btn-primary"%>	
