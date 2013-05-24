@@ -6,6 +6,7 @@ class CreateActions < ActiveRecord::Migration
       t.string :description
       t.integer :next_state_id
       t.integer :sub_workflow_id
+      t.integer :order_no
 
       t.timestamps
     end

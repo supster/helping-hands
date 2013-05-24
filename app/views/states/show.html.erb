@@ -1,33 +1,57 @@
-<% provide(:title, 'State')%>  
+<% provide(:title, 'Helping-Hands')%>  
+<% content_for :head do %>
+<script type="text/javascript">
+	function takeAction(nextStateID, saveAction){
+		$("#next_state_id").val(nextStateID);
+		$("#save").val(saveAction);
+		//return true;
+	}
+</script>
+<% end %>
 <div>
 	<h4><%= @state.description.html_safe %></h4>	
-
-	<% if !@programs.nil? %>
-		<% @programs.each do |pro| %>
-			<div style="color: green; font-weight: bold;"><%= pro.name %></div>
-			<div>More information: <%= link_to pro.url, pro.url, target: "blank" %></div>
-			<ul class="lists">
-				<% pro.agency.locations.each do |loc| %>
-				<li>
-					<strong><%= loc.name %></strong><br>
-					<%= render "shared/show_address", address: loc  %>
-					Phone: <%= loc.phone %>
-				</li>
-				<% end %>
-			<ula>
+	<% if @state.action_type.name == "ProgramForm" %>
+		<% if !@programs.nil? %>
+			<% @programs.each do |pro| %>
+				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
+				<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
+				<ul class="lists">
+					<% pro.agency.locations.each do |loc| %>
+					<li>
+						<strong><%= loc.name %></strong><br>
+						<%= render "shared/show_address", address: loc  %>
+						<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
+					</li>
+					<% end %>
+				<ul>
+			<% end %>
+		<% end %>
+	<% elsif @state.action_type.name == "YesNo" %>
+		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
+			<%= hidden_field_tag "save" %>
+			<%= hidden_field_tag "next_state_id" %>
+			<% @actions.each do |ac| %>
+				<%= #if !ac.next_state_id.nil?
+					button_tag 	ac.name, onclick: "takeAction('#{ac.next_state_id}','#{ac.save}');", 
+								class: "btn btn-medium btn-primary"
+					#link_to ac.name, workflow_state_path(@workflow_id, ac.next_state_id), class: "btn btn-medium btn-primary"
+				#else
+				#	ac.name
+				#end 
+				%>
+			<% end %>
+		<% end %>
+	<% elsif @state.action_type.name == "InputForm" %>
+		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
+			<% if @state.form_name = "show_household" %>
+				How many people are in your household?
+				<%= select_tag :household_size, 
+				options_for_select([[1,1], [2,2], [3,3], [4,4], [5,5], [6,6], [7,7], [8,8], [9,9]]) %><br/>
+			<% elsif @state.form_name = "show_monthly_income" %>
+				How much do you earn altogether per month?
+				<%= text_field_tag :monthly_income %>
+			<% end %>
+			<%= button_tag "Next", class: "btn btn-medium btn btn-primary" %>
 		<% end %>
 	<% end %>
-
-	<ul>
-		<% @actions.each do |ac| %>
-			<li>
-				<%= if !ac.next_state_id.nil?
-						link_to ac.name,  workflow_state_path(@workflow_id, ac.next_state_id)
-					end 
-				%>
-			</li>
-		<% end %>
-	</ul>
-
-
 </div>

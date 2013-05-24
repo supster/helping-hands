@@ -9,7 +9,7 @@ class WorkflowsController < ApplicationController
 
   def show
     @workflow = Workflow.find(params[:id])
-  	@states = @workflow.states
+  	@states = @workflow.states.order("id")
   	#@actions = Action.where("state_id = " + @state.id.to_s)
   end
 end

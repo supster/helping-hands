@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130512141052) do
+ActiveRecord::Schema.define(:version => 20130519172434) do
+
+  create_table "action_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "actions", :force => true do |t|
     t.integer  "state_id"
@@ -19,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20130512141052) do
     t.string   "description"
     t.integer  "next_state_id"
     t.integer  "sub_workflow_id"
+    t.integer  "order_no"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
@@ -87,8 +94,9 @@ ActiveRecord::Schema.define(:version => 20130512141052) do
     t.text     "description"
     t.string   "form_name"
     t.string   "form_param"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "action_type_id"
   end
 
   add_index "states", ["workflow_id"], :name => "index_states_on_workflow_id"
@@ -101,6 +109,12 @@ ActiveRecord::Schema.define(:version => 20130512141052) do
     t.boolean  "admin",           :default => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+    t.string   "age"
+    t.date     "date_of_birth"
+    t.integer  "household_size"
+    t.float    "monthly_income"
+    t.boolean  "citizen"
+    t.boolean  "immigrant"
   end
 
   add_index "users", ["remember_token"], :name => "index_users_on_remember_token"

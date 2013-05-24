@@ -1,20 +1,22 @@
 HelpingHands::Application.routes.draw do
-  get "states/show"
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :workflows do
-    resources :states, only: [:show]
+    resources :states do
+      get 'final', :on => :member
+    end
   end
 
-  root to: 'welcome#home'
+  root to: 'workflows#index'
 
   match '/signup',    to: 'users#new'
   
   match '/signin',    to: 'sessions#new'
   match '/signout',   to: 'sessions#destroy', via: :delete
+
+  #get 'states/final'
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

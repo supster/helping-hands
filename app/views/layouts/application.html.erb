@@ -5,6 +5,7 @@
 	  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "My Vendor Reviews" %>">
 	  <%= stylesheet_link_tag "application", :media => "all" %>
 	  <%= javascript_include_tag "application" %>
+	  <%= javascript_include_tag "json2", "amplify.store.min" %>
 	  <%= csrf_meta_tags %>
 		<!--[if lt IE 9]>
 		<script src="assets/html5shiv.js"></script>
