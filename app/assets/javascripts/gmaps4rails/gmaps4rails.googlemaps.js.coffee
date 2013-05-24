@@ -11,6 +11,7 @@ class @Gmaps4RailsGoogle extends Gmaps4Rails
       disableDefaultUI:       false
       disableDoubleClickZoom: false
       type:                   "ROADMAP" # HYBRID, ROADMAP, SATELLITE, TERRAIN
+      maxZoom:                15
 
     #markers + info styling
     @markers_conf =

@@ -40,6 +40,7 @@ class StatesController < ApplicationController
   def final
     @program = Program.find_by_id(params[:prog])
     @location = Location.find_by_id(params[:loc])
+    @json=@location.to_gmaps4rails
   end
 
   def end_wf
