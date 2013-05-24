@@ -12,7 +12,12 @@
 				<%= render "shared/show_address", address: @location  %>
 				<strong>Phone: <%= @location.phone %></strong>
 			</div><br>
-			<div><%= gmaps("markers" => {"data" => @json, "options" => {"custom_infowindow_class" => "white" } }) %> </div>
+			<%  @url = "http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=500x250&maptype=roadmap&markers=color:blue|label:S|"+
+						"#{@location.latitude}"+","+"#{@location.longitude}"+
+						"&sensor=false"
+			%>
+		
+			<div><img src="<%= @url %>"></div>
 		</div>
 	</div><br><br>
 	<%= link_to "Back", workflow_state_path(params[:workflow_id], params[:id]), class: "btn btn-large btn-primary"%>	
