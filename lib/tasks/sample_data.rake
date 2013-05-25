@@ -6,9 +6,10 @@ namespace :db do
     Agency.delete_all
     Service.delete_all
     Program.delete_all
+    ProgramCriteria.delete_all
     Location.delete_all
 
-    make_Agency
+    make_agency
     #make_GED "#{Rails.root}/lib/tasks/GED_service.csv", 1
     #make_Work "#{Rails.root}/lib/tasks/Workforce_1_Career_Center_Locations3.csv", 2
     #make_courses
@@ -16,21 +17,22 @@ namespace :db do
  end
  
  #populate
- def make_Agency
+ def make_agency
    agency = Agency.create!(name: "District 79 - NYC Department of Education")
-   service = Service.create!(name: "High School Alternatives")
-   service.programs.create!(name: "Alternative Schools & Programs", agency_id: agency.id,
+   service = Service.create!(name: "High School")
+   program = service.programs.create!(name: "Alternative Schools & Programs", agency_id: agency.id,
                             url: "http://schools.nyc.gov/ChoicesEnrollment/AlternativesHS/Referral/default.htm")
-   make_Agency_locations(agency.id, "#{Rails.root}/lib/tasks/Referral_Centers_For_High_School_Alternatives.csv")
+   program.program_criterias.create!(name: "check age", value: "age:<21")
+   make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/Referral_Centers_For_High_School_Alternatives.csv")
 
    agency = Agency.create!(name: "Office of Adult & Continuing Education")
-   service = Service.create!(name: "Adult GED")
-   service.programs.create!(name: "High School Equivalency (GED)", agency_id: agency.id,
+   program = service.programs.create!(name: "High School Equivalency (GED)", agency_id: agency.id,
                             url: "http://schools.nyc.gov/ChoicesEnrollment/AdultEd/ProgramOfferings/default.htm")
-   make_Agency_locations(agency.id, "#{Rails.root}/lib/tasks/OACE.csv")
+   program.program_criterias.create!(name: "check age", value: "age:>=21")
+   make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/OACE.csv")
  end
 
- def make_Agency_locations(agency_id, filename)
+ def make_agency_locations(agency_id, filename)
     csv_contents = CSV.parse(File.read(filename), {:converters => :all, headers: true} ) do |row|
     location = Location.new(agency_id: agency_id, name: row[0], address: row[1], city: row[2], 
                          state: row[3], zip: row[4], phone: row[5], latitude: row[7], longitude: row[8])
@@ -39,6 +41,10 @@ namespace :db do
     else
       location.errors.inspect
     end
+ end
+
+ def make_program_criteria(program, name, value)
+   program.create!(name: name, value: value)
  end
 
 =begin

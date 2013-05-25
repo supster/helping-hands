@@ -1,4 +1,4 @@
-<% provide(:title, 'Helping-Hands')%>  
+<% provide(:title, 'Helping Hands')%>  
 <% content_for :head do %>
 <script type="text/javascript">
 	function takeAction(nextStateID, saveAction){
@@ -16,45 +16,13 @@
 <div>
 	<h3><%= @workflow.name %></h3>
 	<h4><%= @state.description.html_safe %></h4>	
-	<% if @state.action_type.name == "ProgramForm" %>
-		<% if !@programs.nil? %>
-			<div class="row"/>
-				<div class="span7">
-				<% markers = "" %>
-				<% @programs.each do |pro| %>
-					<div style="color: green; font-weight: bold;"><%= pro.name %></div>
-					<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
-					<ul class="lists">
-						<% pro.agency.locations.each do |loc| %>
-							<li>
-								<strong><%= loc.name %></strong><br>
-								<%= render "shared/show_address", address: loc  %>
-								<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
-
-								<%
-									markers +=  "&"+
-												"markers=color:blue|label:S|"+
-														 "#{loc.latitude}"+","+"#{loc.longitude}"
-								%>
-							</li>
-						<% end %>
-					<ul>
-				<% end %>
-				</div>
-				<%  @url = "http://maps.googleapis.com/maps/api/staticmap?size=500x250&maptype=roadmap"+
-								"#{markers}"+
-								"&sensor=false"
-				%>
-				<div class="span5"><img src="<%= @url %>"></div>
-			</div>					
-		<% end %>
-	<% elsif @state.action_type.name == "YesNo" %>
+	<% if @state.action_type.name == "YesNo" %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
 			<%= hidden_field_tag "save" %>
 			<%= hidden_field_tag "next_state_id" %>
 			<% @actions.each do |ac| %>
-				<%= button_tag 	ac.name, onclick: "takeAction('#{ac.next_state_id}','#{ac.save_attr}');", 
-								class: "btn btn-medium btn-primary" %>
+				<%= button_tag 	ac.name, name: "action_id", value: ac.id, 
+				onclick: "takeAction('#{ac.next_state_id}','#{ac.save_attr}');", class: "btn btn-medium btn-primary" %>
 			<% end %>
 		<% end %>
 	<% elsif @state.action_type.name == "InputForm" %>
@@ -67,7 +35,8 @@
 			<% end %>
 			<%= hidden_field_tag "save" %>
 			<%= hidden_field_tag "next_state_id" %>
-			<%= button_tag "Next", onclick: "takeValue('#{@actions[0].next_state_id}','#{@actions[0].save_attr}');",
+			<%= button_tag "Next", name: "action_id", value: @actions.first.id, 
+							onclick: "takeValue('#{@actions.first.next_state_id}','#{@actions.first.save_attr}');",
 							class: "btn btn-medium btn btn-primary" if @actions.count > 0 %>
 		<% end %>
 	<% end %>

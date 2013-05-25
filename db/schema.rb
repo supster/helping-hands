@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523183741) do
+ActiveRecord::Schema.define(:version => 20130525011242) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
@@ -49,6 +49,21 @@ ActiveRecord::Schema.define(:version => 20130523183741) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "case_workflow_values", :force => true do |t|
+    t.integer  "user_case_id"
+    t.integer  "workflow_id"
+    t.integer  "state_id"
+    t.integer  "action_id"
+    t.string   "save_attr"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "case_workflow_values", ["action_id"], :name => "index_case_workflow_values_on_action_id"
+  add_index "case_workflow_values", ["state_id"], :name => "index_case_workflow_values_on_state_id"
+  add_index "case_workflow_values", ["user_case_id"], :name => "index_case_workflow_values_on_user_case_id"
+  add_index "case_workflow_values", ["workflow_id"], :name => "index_case_workflow_values_on_workflow_id"
+
   create_table "locations", :force => true do |t|
     t.string   "name"
     t.string   "description"
@@ -67,6 +82,16 @@ ActiveRecord::Schema.define(:version => 20130523183741) do
   end
 
   add_index "locations", ["agency_id"], :name => "index_locations_on_agency_id"
+
+  create_table "program_criteria", :force => true do |t|
+    t.integer  "program_id"
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "program_criteria", ["program_id"], :name => "index_program_criteria_on_program_id"
 
   create_table "programs", :force => true do |t|
     t.string   "name"
@@ -104,6 +129,14 @@ ActiveRecord::Schema.define(:version => 20130523183741) do
 
   add_index "states", ["workflow_id"], :name => "index_states_on_workflow_id"
 
+  create_table "user_cases", :force => true do |t|
+    t.string   "case_token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_cases", ["case_token"], :name => "index_user_cases_on_case_token"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -129,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20130523183741) do
     t.integer  "start_state_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "service_id"
   end
 
   add_index "workflows", ["area_id"], :name => "index_workflows_on_area_id"

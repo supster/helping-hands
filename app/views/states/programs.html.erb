@@ -1,0 +1,37 @@
+<% provide(:title, 'Helping-Hands')%>  
+<div>
+	<h3><%= @workflow.name %></h3>
+	<h4>This program might work best for you.</h4>	
+
+	<% if !@programs.nil? %>
+		<div class="row"/>
+			<div class="span7">
+			<% markers = "" %>
+			<% @programs.each do |pro| %>
+				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
+				<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
+				<ul class="lists">
+					<% pro.agency.locations.each do |loc| %>
+						<li>
+							<strong><%= loc.name %></strong><br>
+							<%= render "shared/show_address", address: loc  %>
+							<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
+
+							<%
+								markers +=  "&"+
+											"markers=color:blue|label:S|"+
+													 "#{loc.latitude}"+","+"#{loc.longitude}"
+							%>
+						</li>
+					<% end %>
+				<ul>
+			<% end %>
+			</div>
+			<%  @url = "http://maps.googleapis.com/maps/api/staticmap?size=500x250&maptype=roadmap"+
+							"#{markers}"+
+							"&sensor=false"
+			%>
+			<div class="span5"><img src="<%= @url %>"></div>
+		</div>					
+	<% end %>
+</div>

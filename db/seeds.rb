@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 	
-["YesNo", "InputForm", "FAQ", "ProgramForm"].each do |a|
+["YesNo", "InputForm", "FAQ"].each do |a|
   ActionType.find_or_create_by_name(a)
 end
 
@@ -17,25 +17,31 @@ end
 Workflow.delete_all
 State.delete_all
 Action.delete_all
+CaseWorkflowValue.delete_all
 
 area_id = Area.find_by_name("Education").id
+service_id = Service.find_by_name("High School").id
 #Education - Finish Highschool
 workflow = Workflow.create(name: "Finishing High School", 
-						 description: "I need help finishing High School.", area_id: area_id)
+						 description: "I need help finishing High School.", service_id: service_id, area_id: area_id)
 
 state = State.create(name: "Check Age", description: "Are you 21 or older?", workflow_id: workflow.id, action_type_id: 1)
 workflow.start_state_id = state.id
 workflow.save
 
-action1 = Action.new(name: "Yes", description: "21 or older", save_attr: "age: >=21", state_id: state.id, order_no: 0)
-action2 = Action.new(name: "No", description: "Younger than 21", save_attr: "age: <21", state_id: state.id, order_no: 1)
-
+action1 = Action.new(name: "Yes", description: "21 or older", save_attr: "age:>=21", state_id: state.id, order_no: 0)
+action2 = Action.new(name: "No", description: "Younger than 21", save_attr: "age:<21", state_id: state.id, order_no: 1)
+action1.next_state_id = 0
+action1.save
+action2.next_state_id = 0
+action2.save
+=begin
 # Older than 21
 state = State.create(name: "Adult Learning Programs", 
 			description: "GED preparation classes can help you reach your goal!<br> 
 						 Please contact one of these program centers near you:",
 			workflow_id: workflow.id,
-			form_name: "show_programs", form_param: "Adult GED", action_type_id: 4)
+			form_name: "show_programs", form_param: "High School", action_type_id: 4)
 action1.next_state_id = state.id
 action1.save
 
@@ -44,10 +50,10 @@ state = State.create(name: "High School Alternatives",
 				description: "You are in luck! There are multiple programs that can help.
 						 You might be eligible for Transfer Schools, Young Adult Borough Centers (YABCs), or GED Plus.",
 				workflow_id: workflow.id,
-				form_name: "show_programs", form_param: "High School Alternatives", action_type_id: 4)
+				form_name: "show_programs", form_param: "High School", action_type_id: 4)
 action2.next_state_id = state.id
 action2.save
-
+=end
 #Education - Improve my English
 workflow = Workflow.create(name: "Improving My English", 
 						 description: "I want to improve my English.", area_id: area_id)
@@ -65,7 +71,8 @@ workflow = Workflow.create(name: "Finding a job or internship",
 
 ## Workflow Number 2 - Medicaid
 area_id = Area.find_by_name("Health").id
-workflow = Workflow.create(name: "Applying for Health Insurance", 
+service = Service.create(name: "Health Insurance")
+workflow = Workflow.create(name: "Applying for Health Insurance", service_id: service.id,
 						 description: "I need health insurance.", area_id: area_id)
 
 #check age
@@ -129,7 +136,7 @@ action2 = Action.new(name: "No/I don't know", description: "Don't have US Citize
 action2.save
 
 #Proof of US Citizen
-state = State.create(name: "Proof Citizenship FAQ", description: "Proof Citizenship FAQ", workflow_id: workflow.id, action_type_id: 4)
+state = State.create(name: "Proof Citizenship FAQ", description: "Proof Citizenship FAQ", workflow_id: workflow.id, action_type_id: 3)
 action2.next_state_id = state.id
 action2.save
 
