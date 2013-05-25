@@ -20,10 +20,10 @@ Action.delete_all
 CaseWorkflowValue.delete_all
 
 area_id = Area.find_by_name("Education").id
-service_id = Service.find_by_name("High School").id
+service = Service.find_by_name("high school")
 #Education - Finish Highschool
 workflow = Workflow.create(name: "Finishing High School", 
-						 description: "I need help finishing High School.", service_id: service_id, area_id: area_id)
+						 description: "I need help finishing High School.", service_id: service.id, area_id: area_id)
 
 state = State.create(name: "Check Age", description: "Are you 21 or older?", workflow_id: workflow.id, action_type_id: 1)
 workflow.start_state_id = state.id
@@ -71,7 +71,7 @@ workflow = Workflow.create(name: "Finding a job or internship",
 
 ## Workflow Number 2 - Medicaid
 area_id = Area.find_by_name("Health").id
-service = Service.create(name: "Health Insurance")
+service = Service.find_by_name("health insurance")
 workflow = Workflow.create(name: "Applying for Health Insurance", service_id: service.id,
 						 description: "I need health insurance.", area_id: area_id)
 
@@ -80,9 +80,9 @@ state = State.create(name: "Check Age", description: "How old are you?", workflo
 workflow.start_state_id = state.id
 workflow.save
 
-action1 = Action.create(name: "Younger than 19", description: "Younger than 19", state_id: state.id, order_no: 0) #END
-action2 = Action.new(name: "19 to 65", description: "19 to 65", state_id: state.id, order_no: 1)
-action3 = Action.new(name: "Older than 65", description: "Older than 65", state_id: state.id, order_no: 2)
+action1 = Action.create(name: "Younger than 19", description: "Younger than 19", save_attr: "age:<19", state_id: state.id, order_no: 0) #END
+action2 = Action.new(name: "19 to 65", description: "19 to 65", state_id: state.id, save_attr: "age:19-65",order_no: 1)
+action3 = Action.new(name: "Older than 65", description: "Older than 65", state_id: state.id, save_attr: "age:<65",order_no: 2)
 
 #check residency
 state = State.create(name: "Check Residency", description: "Do you live in New York State?", workflow_id: workflow.id, action_type_id: 1)
@@ -91,8 +91,8 @@ action2.save
 action3.next_state_id = state.id
 action3.save
 
-action1 = Action.new(name: "Yes", description: "Live in New York", state_id: state.id, order_no: 0)
-action2 = Action.new(name: "No", description: "Don't live in New York", state_id: state.id, order_no: 1) # END
+action1 = Action.new(name: "Yes", description: "Live in New York", state_id: state.id, save_attr: "resident:NY", order_no: 0)
+action2 = Action.new(name: "No", description: "Don't live in New York", state_id: state.id, save_attr: "resident:Other", order_no: 1) # END
 action2.save
 
 #Do you have a proof of residency? (e.g. XXXXXX)
@@ -114,16 +114,16 @@ state = State.create(name: "Check Citizenship", description: "Are you a U.S. Cit
 action1.next_state_id = state.id
 action1.save
 
-action1_citizen = Action.new(name: "Yes", description: "Have US Citizenship", state_id: state.id, order_no: 0)
-action2 = Action.new(name: "No", description: "Not US Citizen", state_id: state.id, order_no: 1)
+action1_citizen = Action.new(name: "Yes", description: "Have US Citizenship", save_attr: "citizen:true", state_id: state.id, order_no: 0)
+action2 = Action.new(name: "No", description: "Not US Citizen", state_id: state.id, save_attr: "citizen:false", order_no: 1)
 
 #Immigration
 state = State.create(name: "Check Immigration", description: "Are you a Qualified Immigrant? (e.g. Green Card)", workflow_id: workflow.id, action_type_id: 1)
 action2.next_state_id = state.id
 action2.save
 
-action1_imm = Action.create(name: "Yes", description: "Qualified Immigrant", state_id: state.id, order_no: 0) # Still to do!
-action2_imm = Action.create(name: "No", description: "Not Immigrant", state_id: state.id, order_no: 1) # END
+action1_imm = Action.create(name: "Yes", description: "Qualified Immigrant", state_id: state.id, save_attr: "Immigrant:true",order_no: 0) # Still to do!
+action2_imm = Action.create(name: "No", description: "Not Immigrant", state_id: state.id, save_attr: "Immigrant:false", order_no: 1) # END
 
 #Proof of US Citizen
 state = State.create(name: "Check Proof Citizenship", description: "Do you have a proof of citizenship?", workflow_id: workflow.id, action_type_id: 1)
@@ -152,8 +152,8 @@ state = State.create(name: "Check Disability", description: "Are you disabled?",
 action1_proof.next_state_id = state.id
 action1_proof.save
 
-action1 = Action.create(name: "Yes", description: "Disable", state_id: state.id, order_no: 0) # END
-action2 = Action.new(name: "No", description: "Not Disable", state_id: state.id, order_no: 1)
+action1 = Action.create(name: "Yes", description: "Disable", state_id: state.id, save_attr: "disable:true", order_no: 0) # END
+action2 = Action.new(name: "No", description: "Not Disable", state_id: state.id, save_attr: "disable:false", order_no: 1)
 
 # Checking number of people in the family
 state = State.create(name: "Check Household Size", 
@@ -174,4 +174,4 @@ action1.save
 
 action1 = Action.create(name: "Next", description: "Monthly Income", save_attr: "monthly_income:", state_id: state.id, order_no: 0) # END
 action1.next_state_id = 0 # 0 means we should calculate the rules
-
+action1.save

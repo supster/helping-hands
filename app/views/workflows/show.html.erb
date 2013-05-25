@@ -1,12 +1,45 @@
 <% provide(:title, 'Workflow')%>  
 <div>
-	<h2><%= @workflow.name %></h2>	
-	<table>
+	<h2><%= @workflow.name %></h2>
+	<div>Description: <%= @workflow.description %></div>
+	<div>Service:<%= @workflow.service.name %></div>
+	<div>Area: <%= @workflow.area.name %></div>
+	<table border="1">
+		<tr>
+			<td>State ID</td>
+			<td>Name</td>
+			<td>Description</td>
+			<td>Action Type</td>
+		</tr>
 		<% @states.each do |st| %>
 		<tr>
+			<td><%= st.id %></td>
 			<td><%= st.name %></td>
 			<td><%= st.description %></td>
+			<td><%= st.action_type.name %></td>
 		</tr>
+			<tr>
+				<td colspan="4">
+					<table border="1" width="100%">
+					<tr>
+						<td>Action</td>
+						<td>Description</td>
+						<td>Save Attribute</td>
+						<td>Next State</td>
+						<td>Display Order</td>
+					</tr>
+					<% st.actions.each do |ac| %>
+						<tr>
+							<td><%= ac.name %></td>
+							<td><%= ac.description %></td>
+							<td><%= ac.save_attr %></td>
+							<td><%= ac.next_state_id %></td>
+							<td><%= ac.order_no %></td>
+						</tr>
+					<% end %>
+					</table>
+				</td>
+			</tr>
 		<% end %>
 	</table>
 	

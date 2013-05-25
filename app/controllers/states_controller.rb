@@ -19,7 +19,7 @@ class StatesController < ApplicationController
         cwf.first.update_attributes(action_id: params[:action_id], save_attr: params[:save])
       end
 
-      if params[:next_state_id] != "" 
+      if params[:next_state_id] != ""
         # end of workflow state so we calculate rules and display programs that satisfied the rules
         if params[:next_state_id] == "0"
           #calculate Rule          
@@ -43,7 +43,7 @@ class StatesController < ApplicationController
           redirect_to workflow_state_path @workflow_id, params[:next_state_id]
         end
       else
-        render :end_wf
+        render :end_wf # if next state is blank shows not eligible page
       end
     end
 

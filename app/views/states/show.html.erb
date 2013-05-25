@@ -1,13 +1,13 @@
 <% provide(:title, 'Helping Hands')%>  
 <% content_for :head do %>
 <script type="text/javascript">
-	function takeAction(nextStateID, saveAction){
+	function take_action(nextStateID, saveAction){
 		$("#next_state_id").val(nextStateID);
 		$("#save").val(saveAction);
 		//return true;
 	}
 
-	function takeValue(nextStateID, saveAttribute){
+	function take_value(nextStateID, saveAttribute){
 		$("#next_state_id").val(nextStateID);
 		$("#save").val(saveAttribute + $("#input_value").val());
 	}
@@ -22,7 +22,7 @@
 			<%= hidden_field_tag "next_state_id" %>
 			<% @actions.each do |ac| %>
 				<%= button_tag 	ac.name, name: "action_id", value: ac.id, 
-				onclick: "takeAction('#{ac.next_state_id}','#{ac.save_attr}');", class: "btn btn-medium btn-primary" %>
+				onclick: "take_action('#{ac.next_state_id}','#{ac.save_attr}');", class: "btn btn-medium btn-primary" %>
 			<% end %>
 		<% end %>
 	<% elsif @state.action_type.name == "InputForm" %>
@@ -36,8 +36,17 @@
 			<%= hidden_field_tag "save" %>
 			<%= hidden_field_tag "next_state_id" %>
 			<%= button_tag "Next", name: "action_id", value: @actions.first.id, 
-							onclick: "takeValue('#{@actions.first.next_state_id}','#{@actions.first.save_attr}');",
+							onclick: "take_value('#{@actions.first.next_state_id}','#{@actions.first.save_attr}');",
 							class: "btn btn-medium btn btn-primary" if @actions.count > 0 %>
+		<% end %>
+	<% elsif @state.action_type.name == "FAQ" %>
+		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
+			<% @actions.each do |ac| %>
+				<% if !ac.next_state_id.nil? %>
+				<%= link_to ac.name, workflow_state_path(@workflow.id, ac.next_state_id), name: "action_id", value: ac.id, class: "btn btn-medium btn-primary" %>
+				<%end%>
+
+			<% end %>
 		<% end %>
 	<% end %>
 </div>

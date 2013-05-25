@@ -11,7 +11,7 @@ module StatesHelper
   	@aRule
   	def initialize
   	  @aRule = Array.new
-  	  #@aRule << AdultMedicaidRule.new
+  	  @aRule << AdultMedicaidRule.new
   	  #@aRule << ChildHealthPlusRule.new
   	  @aRule.push OtherServiceRule.new
   	end
@@ -20,7 +20,7 @@ module StatesHelper
   	  @aRule.each do |oRule|
   	  	if oRule.is_match(workflow.service.name)
   	  	  program_id = oRule.calculate_eligibility(workflow, user_case)
-  	  	  return program_id # if Rule is calculated by pass it
+  	  	  return program_id
   	  	end
   	  end
   	end
@@ -28,13 +28,33 @@ module StatesHelper
 
   class AdultMedicaidRule < Rule 	
   	def is_match(workflow_service)
-  	  workflow_name.downcase == "health insurance"
+  	  workflow_service.downcase == "health insurance"
   	end
 
   	def calculate_eligibility(workflow, user_case)
   	  #need household_size, age and income level to calculate
   	  #@eligible = Eligibility.new(eligible: true, service_id: 1, message: "testing")
   	  #@eligible
+  	  prog_id = Array.new
+  	  case_wf = CaseWorkflowValue.where("user_case_id = ? and workflow_id = ?", user_case.id, workflow.id)
+  	  programs = Service.find_by_id(workflow.service_id).programs
+  	  household_size = 1
+  	  monthly_income = 0
+  	  case_wf.each do |wf|
+  	  	case wf.state.name.downcase
+  	  	  when "check household size"
+  	  	    household_size = wf.save_attr.split(":")[1]
+  	  	  when "check monthly income"
+  	  	  	monthly_income = wf.save_attr.split(":")[1]
+  	  	end
+  	  end
+
+  	  if monthly_income.to_f < 1000
+  	  	prog_id.push programs.first
+  	  else
+  	  	prog_id.push programs.second
+  	  end
+  	  return prog_id
   	end
   end
 
