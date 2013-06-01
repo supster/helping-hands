@@ -1,10 +1,10 @@
 <% provide(:title, 'What help do you need?')%>  
-<div>
+<div id="wf_index">
 	<h4>What help do you need?</h4>	
 	<%= link_to 'Add Workflow', new_workflow_path, class: "btn btn-small btn-primary" if signed_in? %>
-	<ul>
+	<ul class="wf_list">
 		<% @workflows.each do |wf| %>
-			<li><%= if !wf.start_state_id.nil?
+			<li class="wf_list_item"><%= if !wf.start_state_id.nil?
 						link_to wf.description,  workflow_state_path(wf, wf.start_state_id) 
 					else
 						wf.description

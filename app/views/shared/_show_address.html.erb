@@ -1,4 +1,8 @@
 <% if !address.nil? %>
-  <%= address.address %><br>
-  <%= address.city %>, <%= address.state %> <%= address.zip %> <br>
+  <div class="address1">
+  	<%= address.address %>
+  </div>
+  <div class="address2">
+	<%= address.city %>, <%= address.state %> <%= address.zip %>
+  </div>
 <% end %>

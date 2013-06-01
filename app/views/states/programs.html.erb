@@ -1,19 +1,19 @@
 <% provide(:title, 'Helping-Hands')%>  
-<div>
+<div id="st_program">
 	<h3><%= @workflow.name %></h3>
 	<h4>This program might work best for you.</h4>	
 
 	<% if !@programs.nil? %>
 		<div class="row"/>
-			<div class="span7">
+			<div class="program_list">
 			<% markers = "" %>
 			<% @programs.each do |pro| %>
 				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
 				<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
-				<ul class="lists">
+				<ul class="program_lists">
 					<% pro.agency.locations.limit(10).each do |loc| %>
-						<li>
-							<strong><%= loc.name %></strong><br>
+						<li class="program_list_item">
+							<div class="program_name"><%= loc.name %></div>
 							<%= render "shared/show_address", address: loc  %>
 							<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
 
@@ -31,7 +31,7 @@
 							"#{markers}"+
 							"&sensor=false"
 			%>
-			<div class="span5"><img src="<%= @url %>"></div>
+			<div class="program_map"><img src="<%= @url %>"></div>
 		</div>					
 	<% end %>
 </div>
