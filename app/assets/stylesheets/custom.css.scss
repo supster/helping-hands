@@ -6,6 +6,12 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  width: 480px;
+}
+
+
 /* forms */
 
 input, textarea, select, .uneditable-input {
@@ -81,4 +87,37 @@ input, textarea, select, .uneditable-input {
 
 .not_done {
   background-color: red;
+}
+
+
+/* Lena Additions */
+
+.container {
+  margin: 10px;
+}
+
+h4 {
+  margin: 0 -10px 10px -10px;
+  padding: 10px;
+  background-color: #0096E1;
+  color: #FFFFFF;
+  font-size: 32pt;
+  line-height: 32pt;
+}
+
+ul.wf_list {
+  font-size: 0;
+}
+
+li.wf_list {
+  font-size: 16pt; line-height: 16pt;
+  width: 200px; height: 200px;
+  padding: 10px; margin: 5px;
+  background-color: #FF8800;
+  color: white;
+  display: inline-table;
+}
+
+li.wf_list a {
+  color: white;
 }
