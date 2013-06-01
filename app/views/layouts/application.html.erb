@@ -2,7 +2,9 @@
 <html>
 	<head>
 	  <title><%= content_for?(:title) ? yield(:title) : "Helping Hands" %></title>
-	  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "My Vendor Reviews" %>">
+	  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Helping Hands" %>">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <link href="assets/bootstrap-responsive.css" rel="stylesheet">
 	  <%= stylesheet_link_tag "application", :media => "all" %>
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
