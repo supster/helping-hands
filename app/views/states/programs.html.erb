@@ -11,7 +11,7 @@
 				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
 				<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
 				<ul class="lists">
-					<% pro.agency.locations.each do |loc| %>
+					<% pro.agency.locations.limit(10).each do |loc| %>
 						<li>
 							<strong><%= loc.name %></strong><br>
 							<%= render "shared/show_address", address: loc  %>

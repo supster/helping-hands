@@ -14,6 +14,12 @@ end
 ["Education", "Work", "Health", "Food", "Housing", "Money", "Child Care"].each do |a|
   Area.find_or_create_by_name(a)
 end
+
+["high school", "health insurance", "job and internship", "english"].each do |a|
+  Service.find_or_create_by_name(a)
+end
+
+
 Workflow.delete_all
 State.delete_all
 Action.delete_all

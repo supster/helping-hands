@@ -64,3 +64,21 @@ input, textarea, select, .uneditable-input {
     padding: 0px 0px;
   }
 }
+
+.action_form {
+  margin-left: 50px;
+  border: 1px solid;
+}
+
+.state_form {
+  margin-left: 20px;
+  border: 1px solid;
+}
+
+.state_id {
+  width: 150px;
+}
+
+.not_done {
+  background-color: red;
+}

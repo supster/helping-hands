@@ -1,6 +1,7 @@
-<% provide(:title, 'Workflow')%>  
+<% provide(:title, 'What help do you need?')%>  
 <div>
 	<h4>What help do you need?</h4>	
+	<%= link_to 'Add Workflow', new_workflow_path, class: "btn btn-small btn-primary" %>
 	<ul>
 		<% @workflows.each do |wf| %>
 			<li><%= if !wf.start_state_id.nil?
@@ -8,8 +9,9 @@
 					else
 						wf.description
 					end 
-				%></li>
+				%>
+		<%= link_to 'Show Workflow', workflow_path(wf), class: "btn btn-small btn-primary" %>
+			</li>
 		<% end %>
 	</ul>
-	
 </div>

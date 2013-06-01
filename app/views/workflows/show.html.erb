@@ -1,8 +1,9 @@
-<% provide(:title, 'Workflow')%>  
+<% provide(:title, 'All Workflow')%>  
 <div>
 	<h2><%= @workflow.name %></h2>
+	<%= link_to 'Edit', edit_workflow_path(@workflow), class: "btn btn-small btn-primary" %>
 	<div>Description: <%= @workflow.description %></div>
-	<div>Service:<%= @workflow.service.name %></div>
+	<div>Service:<%= @workflow.service.name unless @workflow.service.nil? %></div>
 	<div>Area: <%= @workflow.area.name %></div>
 	<table border="1">
 		<tr>
@@ -33,7 +34,9 @@
 							<td><%= ac.name %></td>
 							<td><%= ac.description %></td>
 							<td><%= ac.save_attr %></td>
-							<td><%= ac.next_state_id %></td>
+							<td <%= "class=not_done" if ac.next_state_id.nil? %>> 
+								<%= ac.next_state_id %>
+							</td>
 							<td><%= ac.order_no %></td>
 						</tr>
 					<% end %>

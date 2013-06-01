@@ -32,7 +32,7 @@ class StatesController < ApplicationController
           #@programs = Service.find_by_name(@state.form_param).programs.includes(:agency => :locations)
           @programs = Program.find(@program_ids)
           @programs.each do |program|
-            program.agency.locations.each do |address|
+            program.agency.locations.limit(10).each do |address|
               @addresses << address
             end
           end
