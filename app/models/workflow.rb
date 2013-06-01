@@ -4,7 +4,7 @@ class Workflow < ActiveRecord::Base
   belongs_to :area
   has_many :states, dependent: :destroy
   belongs_to :service
-  accepts_nested_attributes_for :states, :reject_if => lambda { |a| a[:state_id].blank? }
+  accepts_nested_attributes_for :states
 
   validates :name, presence: true, length: { maximum: 255 }
 
