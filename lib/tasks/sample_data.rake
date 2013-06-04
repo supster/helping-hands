@@ -4,10 +4,13 @@ namespace :db do
  desc "upload CSV data" 
  task populate: :environment do
     Agency.delete_all
-    Service.delete_all
     Program.delete_all
     ProgramCriteria.delete_all
     Location.delete_all
+
+    ["high school", "health insurance", "job and internship", "english"].each do |a|
+      Service.find_or_create_by_name(a)
+    end
 
     make_agency
     #make_GED "#{Rails.root}/lib/tasks/GED_service.csv", 1
@@ -19,7 +22,7 @@ namespace :db do
  #populate
  def make_agency
     agency = Agency.create!(name: "District 79 - NYC Department of Education")
-    service = Service.create!(name: "high school")
+    service = Service.find_by_name("high school")
     program = service.programs.create!(name: "Alternative Schools & Programs", agency_id: agency.id,
                             url: "http://schools.nyc.gov/ChoicesEnrollment/AlternativesHS/Referral/default.htm")
     program.program_criterias.create!(name: "check age", value: "age:<21")
@@ -32,7 +35,7 @@ namespace :db do
     make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/OACE.csv")
 
     agency = Agency.create!(name: "New York Medicaid")
-    service = Service.create!(name: "health insurance")
+    service = Service.find_by_name("health insurance")
     program = service.programs.create!(name: "Adult Medicaid", agency_id: agency.id,
                             url: "http://www.health.ny.gov/health_care/medicaid/")
     #program.program_criterias.create!(name: "check age", value: "age:19-65")
@@ -45,6 +48,12 @@ namespace :db do
     #program.program_criterias.create!(name: "check age", value: "age:19-65")
     #program.program_criterias.create!(name: "check age", value: "age:>65")
     make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/Public_Health_Insurance_Enrollment_Sites.csv")   
+
+    program = service.programs.create!(name: "Child Health Plus", agency_id: agency.id,
+                            url: "http://www.health.ny.gov/health_care/child_health_plus/")
+    #program.program_criterias.create!(name: "check age", value: "age:19-65")
+    #program.program_criterias.create!(name: "check age", value: "age:>65")
+    #make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/Public_Health_Insurance_Enrollment_Sites.csv")   
  end
 
  def make_agency_locations(agency_id, filename)

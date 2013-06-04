@@ -37,23 +37,32 @@ module StatesHelper
   	  #@eligible
   	  prog_id = Array.new
   	  case_wf = CaseWorkflowValue.where("user_case_id = ? and workflow_id = ?", user_case.id, workflow.id)
-  	  programs = Service.find_by_id(workflow.service_id).programs
+  	  programs = Service.find_by_id(workflow.service_id).programs.order("id")
   	  household_size = 1
   	  monthly_income = 0
+      age = ""
   	  case_wf.each do |wf|
   	  	case wf.state.name.downcase
+        when ""
   	  	  when "check household size"
   	  	    household_size = wf.save_attr.split(":")[1]
   	  	  when "check monthly income"
   	  	  	monthly_income = wf.save_attr.split(":")[1]
+          when "check age"
+            age = wf.save_attr.split(":")[1]
   	  	end
   	  end
 
-  	  if monthly_income.to_f < 1000
-  	  	prog_id.push programs.first
-  	  else
-  	  	prog_id.push programs.second
-  	  end
+      if age == "<19"
+        #child program
+        prog_id.push programs.third
+      else
+        if monthly_income.to_f < 1000
+          prog_id.push programs.first
+        else
+          prog_id.push programs.second
+        end
+      end
   	  return prog_id
   	end
   end
