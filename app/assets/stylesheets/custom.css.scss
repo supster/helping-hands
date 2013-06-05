@@ -146,12 +146,12 @@ h4 {
 }
 
 
-ul.wf_list {
+.wf_list {
   font-size: 0;
   margin: 0;
 }
 
-li.wf_list_item {
+.wf_list_item {
   font-size: 16pt; line-height: 16pt;
   width: 45%;
   margin: 1.25%;
@@ -160,21 +160,30 @@ li.wf_list_item {
   display: inline-table;
 }
 
-li.wf_list_item a {
+.wf_link {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.wf_desc {
   color: white;
   padding: 2.5%;
   position: absolute;
+  width: 100%;
+  height: 100%;
   z-index: 2;
 }
 
-li.wf_list_item img {
+.wf_list_item img {
   position: relative;
   width: 100%;
 }
 
-li.wf_list_item.disable {
+.wf_list_item.disable {
   background-color: gray;
 }
+
 
 
 btn {
