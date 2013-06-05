@@ -1,6 +1,9 @@
 @media (max-width: 767px)
 {
 
+.navbar .nav.pull-right {
+	display: none;
+}
 
 
 
