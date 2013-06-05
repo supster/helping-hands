@@ -6,10 +6,10 @@
 		<% @workflows.each do |wf| %>
 			<li class="<%= wf.start_state_id.nil? ? 'wf_list_item disable' : 'wf_list_item' %>">
 				<% if !wf.start_state_id.nil? %>
-					<%= link_to(workflow_state_path(wf, wf.start_state_id)) do %>
+					<%= link_to workflow_state_path(wf, wf.start_state_id) do %>
 						<div class="wf_link">
 					 		<div class="wf_desc"><%= wf.description %></div>
-							<%= image_tag "" %>
+							<%= image_tag wf.img %>
 					 	</div>
 					<% end %>	
 				<%	else %>

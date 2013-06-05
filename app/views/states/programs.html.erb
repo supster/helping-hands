@@ -8,8 +8,8 @@
 			<div class="program_list">
 			<% markers = "" %>
 			<% @programs.each do |pro| %>
-				<div style="color: green; font-weight: bold;"><%= pro.name %></div>
-				<div>More information: <%= link_to "Click Here", pro.url, target: "blank" %></div>
+				<h5><%= pro.name %></h5>
+				<div><%= link_to "More Information", pro.url, target: "blank" %></div>
 				<ul class="program_lists">
 					<% pro.agency.locations.limit(10).each do |loc| %>
 						<li class="program_list_item">

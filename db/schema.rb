@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605153433) do
+ActiveRecord::Schema.define(:version => 20130605212536) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
@@ -164,6 +164,7 @@ ActiveRecord::Schema.define(:version => 20130605153433) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "service_id"
+    t.string   "img"
   end
 
   add_index "workflows", ["area_id"], :name => "index_workflows_on_area_id"
