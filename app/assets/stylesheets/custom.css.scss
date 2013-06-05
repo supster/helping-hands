@@ -92,10 +92,36 @@ input, textarea, select, .uneditable-input {
 
 /* Lena Additions */
 
+.navbar {
+  margin: 0;
+}
+
+.navbar-inner {
+  padding: 0;
+  min-height: 48px;
+  background-image: none;
+  background: white;
+  border: 0;
+}
+
+a#logo.brand {
+  width: 284px;
+  height: 48px;
+  font-size: 0;
+  background: url('/assets/images/logo.png') no-repeat;
+}
+
+
 .container {
-  margin: 10px;
+  margin: 0;
+  padding: 0 10px;
   width: 100%;
 }
+
+.navbar .container {
+  padding: 0;
+}
+
 
 h4 {
   margin: 0 -10px 10px -10px;
