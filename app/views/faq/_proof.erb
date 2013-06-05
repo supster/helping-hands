@@ -1,0 +1,24 @@
+<% if !proof.nil? %>
+
+<%case proof.downcase
+  when "residency" %>
+	Examples of acceptable proof of residency are:
+	<ul>
+	<li>lease or deed, or if not available, a letter from a landlord on the landlord's letterhead indicating dates of tenancy and rent payments</li>
+	<li>postmarked envelope mailed to you at your current address, dated less than six (6) months ago</li>
+	<li>prior year's income tax return (parents' or parent's tax return, if listed as dependent)</li>
+	<li>homeowner's or renter's insurance policy</li>
+	<li>driver's license or automobile registration certificate</li>
+	<li>bank statement</li>
+	<li>automobile insurance policy</li>
+	<li>utility bill</li>
+	<li>cell phone bill</li>
+	<li>selective service card</li>
+	<li>voter registration.</li>
+	</ul>
+ <%when "citizenship"%>
+
+ <%else%>
+
+ <%end%>
+<% end %>

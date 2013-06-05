@@ -40,10 +40,7 @@
 							class: "btn btn-medium btn btn-primary" if @actions.count > 0 %>
 		<% end %>
 	<% elsif @state.action_type.name == "FAQ" %>
-		<% if @state.form_name == "other_state_medicaid" %>
-			Please refer to this link for more information about other state's public health care programs:
-			<a href="http://www.medicaid.gov/medicaid-chip-program-information/by-state/by-state.html">Other State Information</a>
-		<% end %>
+		<%= render "faq/proof", proof: @state.form_name %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
 			<% @actions.each do |ac| %>
 				<% if !ac.next_state_id.nil? %>

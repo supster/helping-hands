@@ -4,7 +4,7 @@
 	<%= link_to 'Add Workflow', new_workflow_path, class: "btn btn-small btn-primary" if signed_in? %>
 	<ul class="wf_list">
 		<% @workflows.each do |wf| %>
-			<li class="<%= wf.start_state_id.nil? ? 'wf_list_disable' : 'wf_list_item' %>">
+			<li class="<%= wf.start_state_id.nil? ? 'wf_list_item disable' : 'wf_list_item' %>">
 				<%= if !wf.start_state_id.nil?
 						link_to wf.description,  workflow_state_path(wf, wf.start_state_id) 
 					else
