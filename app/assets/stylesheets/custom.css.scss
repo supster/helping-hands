@@ -135,8 +135,8 @@ h3 {
   padding: 10px;
   background-color: #0096E1;
   color: #FFFFFF;
-  font-size: 32pt;
-  line-height: 32pt;
+  font-size: 28pt;
+  line-height: 28pt;
 }
 
 h4 {
@@ -146,7 +146,8 @@ h4 {
 }
 
 h5 {
-  
+  font-size: 14pt;
+  line-height: 14pt;
 }
 
 
@@ -213,10 +214,29 @@ h5 {
   margin-top: 55%;
 }
 
-.program_map {
+#st_program .program_map {
   position: absolute;
   top: 1.25%;
-  margin: -2.5%;
+  margin: 0 -2.5%;
+}
+
+ul.program_lists {
+  margin: 2.5% 0;
+  list-style-type: none;
+}
+
+li.program_list_item {
+  
+}
+
+.program_name {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+
+#st_final .program_map {
+  margin: 2.5% -2.5%
 }
 
 
