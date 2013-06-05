@@ -3,7 +3,7 @@ class WorkflowsController < ApplicationController
   	if !params[:area].nil?
   	  @workflows = Workflow.where("area_id = " + params[:area])
   	else
-  	  @workflows = Workflow.all
+  	  @workflows = Workflow.order("start_state_id")
   	end
   end
 

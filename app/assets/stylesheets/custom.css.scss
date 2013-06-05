@@ -121,3 +121,16 @@ li.wf_list_item {
 li.wf_list_item a {
   color: white;
 }
+
+li.wf_list_disable {
+  font-size: 16pt; line-height: 16pt;
+  width: 200px; height: 200px;
+  padding: 10px; margin: 5px;
+  background-color: gray;
+  color: white;
+  display: inline-table;
+}
+
+li.wf_list_disable a {
+  color: white;
+}
