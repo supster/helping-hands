@@ -10,6 +10,15 @@
 	width: 95%;
 }
 
+.container {
+  margin: 0;
+  padding: 0 1.25%;
+  width: 100%;
+}
 
+.wf_list_item {
+  width: 45%;
+  margin: 1.25%;
+}
 
 }
