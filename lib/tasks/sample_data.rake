@@ -54,12 +54,50 @@ namespace :db do
     #program.program_criterias.create!(name: "check age", value: "age:19-65")
     #program.program_criterias.create!(name: "check age", value: "age:>65")
     #make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/Public_Health_Insurance_Enrollment_Sites.csv")   
+
+    agency = Agency.create!(name: "Department of Youth & Community Development")
+    service = Service.find_by_name("job and internship")
+    program = service.programs.create!(name: "In-School Youth Program (ISY)", agency_id: agency.id,
+                            url: "http://www.nyc.gov/html/dycd/html/jobs/isy.shtml")
+    program.program_criterias.create!(name: "check age", value: "age:<24")
+    program.program_criterias.create!(name: "check attend school", value: "in_school:true")
+    make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/ISY_Bronx.csv")
+
+    program = service.programs.create!(name: "Young Adult Internship Program", agency_id: agency.id,
+                            url: "http://www.nyc.gov/html/dycd/html/jobs/internship.shtml")
+    program.program_criterias.create!(name: "check age", value: "age:<24")
+    program.program_criterias.create!(name: "check attend school", value: "in_school:false")
+    #make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/ISY_Bronx.csv")
+
+    agency = Agency.create!(name: "Senior Employment Services Unit")
+    service = Service.find_by_name("job and internship")
+    program = service.programs.create!(name: "Senior Employment Services", agency_id: agency.id,
+                            url: "http://www.nyc.gov/html/dfta/html/volunteering/job_training_and_placement.shtml")
+    program.program_criterias.create!(name: "check age", value: "age:>=24")
+    program.program_criterias.create!(name: "check senior", value: "senior:true")
+    location = Location.new(agency_id: agency.id, name: "Senior Employment Services", address: "40 Worth Street", city: "New York", 
+                         state: "NY", zip: "10013", phone: "311") #latitude: row[7], longitude: row[8])
+    if location.valid?
+      location.save
+    else
+      location.errors.inspect
+    end
+ 
+    agency = Agency.create!(name: "Workforce1")
+    service = Service.find_by_name("job and internship")
+    program = service.programs.create!(name: "Workforce1", agency_id: agency.id,
+                            url: "http://www.nyc.gov/html/sbs/wf1/html/home/home.shtml")
+    program.program_criterias.create!(name: "check age", value: "age:>=24")
+    program.program_criterias.create!(name: "check senior", value: "senior:false")
+    make_agency_locations(agency.id, "#{Rails.root}/lib/tasks/Workforce_1_Career_Center.csv")
+
+
  end
 
  def make_agency_locations(agency_id, filename)
     csv_contents = CSV.parse(File.read(filename), {:converters => :all, headers: true} ) do |row|
     location = Location.new(agency_id: agency_id, name: row[0], address: row[1], city: row[2], 
-                         state: row[3], zip: row[4], phone: row[5], latitude: row[7], longitude: row[8])
+                         state: row[3], zip: row[4], phone: row[5]) #latitude: row[7], longitude: row[8])
     if location.valid?
       location.save
     else
