@@ -11,7 +11,7 @@ class StatesController < ApplicationController
     	@actions = Action.where("state_id = ?", @state_id).order("order_no")
       @state = State.find_by_id(@state_id)
 
-      if @workflow.start_state_id.to_s == @state_id || @state.action_type.name == "FAQ"
+      if @workflow.start_state_id.to_s == @state_id || @state.action_type.name == "FAQ" || @state.action_type.name == "Done"
         @encouragement = @workflow.encouragements.sample
       end   
 
