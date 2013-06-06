@@ -3,6 +3,7 @@ class Workflow < ActiveRecord::Base
   attr_accessible :states_attributes
   belongs_to :area
   has_many :states, dependent: :destroy
+  has_many :encouragements, dependent: :destroy
   belongs_to :service
   accepts_nested_attributes_for :states, allow_destroy: true
 

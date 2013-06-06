@@ -7,8 +7,14 @@ class StatesController < ApplicationController
     @state_id = params[:id]
     
     if params[:next_state_id].nil?
-    	@state = State.find_by_id(@state_id)
+
     	@actions = Action.where("state_id = ?", @state_id).order("order_no")
+      @state = State.find_by_id(@state_id)
+
+      if @workflow.start_state_id.to_s == @state_id || @state.action_type.name == "FAQ"
+        @encouragement = @workflow.encouragements.sample
+      end   
+
     else
       # We should save data to the database here
       cwf = current_case.case_workflow_values.where("workflow_id = ? and state_id = ?", @workflow_id, @state_id)
@@ -39,6 +45,8 @@ class StatesController < ApplicationController
           @json = @addresses.to_gmaps4rails
 
           render "states/programs"
+        elsif params[:next_state_id] == "-1"
+          redirect_to root_path
         else
           redirect_to workflow_state_path @workflow_id, params[:next_state_id]
         end

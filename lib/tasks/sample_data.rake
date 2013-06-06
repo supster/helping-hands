@@ -3,22 +3,44 @@ require 'csv'
 namespace :db do
  desc "upload CSV data" 
  task populate: :environment do
+    #clear_all
+    #make_service
+    #make_agency
+
+    make_encouragement
+ end
+
+ def make_encouragement
+    wf = Workflow.find_or_create_by_name("Applying for Health Insurance")
+    Encouragement.create!(name: "Lena", description: "Hang in there!  This step might be unexpected, but it's totally worth it.", workflow_id: wf.id)
+    Encouragement.create!(name: "Patty", description: "There are always people who can help you.  Just pick up the phone.", workflow_id: wf.id)
+    Encouragement.create!(name: "Mike", description: "It might not be as easy as you thought, but you can do it.", workflow_id: wf.id)
+    Encouragement.create!(name: "Mary", description: "Don't worry about the negatives.  Just keep going!", workflow_id: wf.id)
+    Encouragement.create!(name: "Paul", description: "When you're in hospital the next time, you know this is worth it.", workflow_id: wf.id)
+
+
+    wf = Workflow.find_or_create_by_name("Finishing High School")
+    Encouragement.create!(name: "Sarah", description: "High school will open so much more doors for you.  Keep at it!", workflow_id: wf.id)
+    Encouragement.create!(name: "Sam", description: "It might sound very hard right now, but when you look back from future it's actually easier than you think!", workflow_id: wf.id)
+    
+    wf = Workflow.find_or_create_by_name("Finding a job or internship")
+    Encouragement.create!(name: "Tony", description: "It may take a day, a week, a month or a year, but in the end you WILL get there!", workflow_id: wf.id)
+    Encouragement.create!(name: "Claire", description: "Hello beautiful!  Take a deep breath and do it!", workflow_id: wf.id)
+ end
+
+ def clear_all
     Agency.delete_all
     Program.delete_all
     ProgramCriteria.delete_all
     Location.delete_all
-
+ end
+ 
+ def make_service
     ["high school", "health insurance", "job and internship", "english"].each do |a|
       Service.find_or_create_by_name(a)
     end
-
-    make_agency
-    #make_GED "#{Rails.root}/lib/tasks/GED_service.csv", 1
-    #make_Work "#{Rails.root}/lib/tasks/Workforce_1_Career_Center_Locations3.csv", 2
-    #make_courses
-    #make_reviews
  end
- 
+
  #populate
  def make_agency
     agency = Agency.create!(name: "District 79 - NYC Department of Education")

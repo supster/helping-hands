@@ -15,6 +15,17 @@
 <% end %>
 <div id="st_show">
 	<h3><%= @workflow.name %></h3>
+	<% if !@encouragement.nil? %>
+		<div class="row-fluid">
+			<div class="span3 offset1">
+				<%= image_tag "#{@encouragement.name}.jpg", alt: "", size: "100x100" %>
+			</div>
+			<div class="span8">
+				<%= @encouragement.description %> - <%= @encouragement.name %>
+			</div>
+		</div>
+	<% end %>
+
 	<h4><%= @state.description.html_safe %></h4>	
 	<% if @state.action_type.name == "YesNo" %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
@@ -25,6 +36,9 @@
 				onclick: "take_action('#{ac.next_state_id}','#{ac.save_attr}');", class: "btn btn-medium btn-primary" %>
 			<% end %>
 		<% end %>
+	<% elsif @state.action_type.name == "Done" %>
+		<%= link_to "Back", :back, class: "btn btn-large btn-primary btn-back"%>	
+		<%= link_to "Done", root_path, class: "btn btn-medium btn-primary" %>
 	<% elsif @state.action_type.name == "InputForm" %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
 			<% if @state.form_name == "show_household" %>
@@ -46,7 +60,6 @@
 				<% if !ac.next_state_id.nil? %>
 				<%= link_to ac.name, workflow_state_path(@workflow.id, ac.next_state_id), name: "action_id", value: ac.id, class: "btn btn-medium btn-primary" %>
 				<%end%>
-
 			<% end %>
 		<% end %>
 	<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605212536) do
+ActiveRecord::Schema.define(:version => 20130605220442) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,14 @@ ActiveRecord::Schema.define(:version => 20130605212536) do
   add_index "case_workflow_values", ["state_id"], :name => "index_case_workflow_values_on_state_id"
   add_index "case_workflow_values", ["user_case_id"], :name => "index_case_workflow_values_on_user_case_id"
   add_index "case_workflow_values", ["workflow_id"], :name => "index_case_workflow_values_on_workflow_id"
+
+  create_table "encouragements", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "workflow_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "locations", :force => true do |t|
     t.string   "name"

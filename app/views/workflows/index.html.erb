@@ -9,7 +9,7 @@
 					<%= link_to workflow_state_path(wf, wf.start_state_id) do %>
 						<div class="wf_link">
 					 		<div class="wf_desc"><%= wf.description %></div>
-							<%= image_tag wf.img %>
+							<%= image_tag wf.img, alt: "" %>
 					 	</div>
 					<% end %>	
 				<%	else %>
