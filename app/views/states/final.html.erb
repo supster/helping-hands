@@ -14,14 +14,15 @@
 				<%= render "shared/show_address", address: @location  %>
 				<div class="program_phone">Phone: <%= @location.phone %></div>
 			</div>
-			<%  @url = "http://maps.googleapis.com/maps/api/staticmap?zoom=14&size=500x250&maptype=roadmap&markers=color:blue|label:S|"+
+			<%  @url = "http://maps.googleapis.com/maps/api/staticmap?zoom=15&size=500x250&maptype=roadmap&markers=color:blue|label:S|"+
 						"#{@location.latitude}"+","+"#{@location.longitude}"+
 						"&sensor=false"
+				@map_url = "https://maps.google.com/maps?q=#{@location.latitude},#{@location.longitude}&z=15"
 			%>
-		
-			<div class="program_map"><img src="<%= @url %>"></div>
+			
+			<a href="<%= @map_url%>" target="_blank"><div class="program_map"><img src="<%= @url %>"></div></a>
 		</div>
 	</div>
-	<%= link_to "Back", :back, class: "btn btn-large btn-primary btn-back"%>	
-	<a href="javaScript:clickDone()" class="btn btn-large btn-primary btn-done">Done</a>
+	<%= link_to "Back", :back, class: "btn btn-large btn-primary btn-back"%>
+	<%= link_to "Done", new_review_path(prog: @program.id, loc: @location.id), class: "btn btn-large btn-primary btn-done"%>	
 </div>

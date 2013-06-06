@@ -3,4 +3,5 @@ class Program < ActiveRecord::Base
   belongs_to :agency
   has_and_belongs_to_many :services
   has_many :program_criterias
+  has_many :reviews
 end

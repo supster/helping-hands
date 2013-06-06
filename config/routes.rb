@@ -1,7 +1,9 @@
 HelpingHands::Application.routes.draw do
-  get "programs/index"
+  #get "reviews/new"
 
-  get "programs/show"
+  #get "programs/index"
+
+  #get "programs/show"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -13,6 +15,7 @@ HelpingHands::Application.routes.draw do
     end
   end
   resources :programs
+  resources :reviews
 
   root to: 'workflows#index'
 

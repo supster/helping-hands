@@ -2,7 +2,8 @@ class Location < ActiveRecord::Base
   attr_accessible :address, :city, :description, :name, :phone, :state, 
   				  :url, :email, :zip, :agency_id, :latitude, :longitude
   belongs_to :agency
-
+  has_many :reviews
+  
   acts_as_gmappable :lat => 'latitude', :lng => 'longitude',# :process_geocoding => :geocode?,
                   :address => "gmaps4rails_address"#, :normalized_address => "address"
 

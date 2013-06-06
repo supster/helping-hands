@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130605220442) do
+ActiveRecord::Schema.define(:version => 20130606203008) do
 
   create_table "action_types", :force => true do |t|
     t.string   "name"
@@ -117,6 +117,19 @@ ActiveRecord::Schema.define(:version => 20130605220442) do
     t.integer "program_id"
     t.integer "service_id"
   end
+
+  create_table "reviews", :force => true do |t|
+    t.integer  "review_score"
+    t.text     "review_text"
+    t.string   "name"
+    t.integer  "program_id"
+    t.integer  "location_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "reviews", ["location_id"], :name => "index_reviews_on_location_id"
+  add_index "reviews", ["program_id"], :name => "index_reviews_on_program_id"
 
   create_table "services", :force => true do |t|
     t.string   "name"

@@ -18,7 +18,7 @@
 	<% if !@encouragement.nil? %>
 		<div class="row-fluid">
 			<div class="span3 offset1">
-				<%= image_tag "#{@encouragement.name.downcase}.jpg", alt: "", size: "100x100" %>
+				<%= image_tag "#{@encouragement.name.downcase}.jpg", alt: "", size: "80x80" %>
 			</div>
 			<div class="span8">
 				<%= @encouragement.description %> - <%= @encouragement.name %>

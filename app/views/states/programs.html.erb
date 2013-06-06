@@ -10,10 +10,24 @@
 			<% @programs.each do |pro| %>
 				<h5><%= pro.name %></h5>
 				<div><%= link_to "More Information", pro.url, target: "blank" %></div>
+				<% if pro.reviews.count > 0 %>
+					<div class="program_review">
+						<%= image_tag "Stars-#{pro.reviews.average('review_score').ceil}.png", alt: "" %>
+						<%= link_to pluralize(pro.reviews.count, "review"), reviews_path(prog: pro.id) %>
+					</div>
+				<% end %>
 				<ul class="program_lists">
 					<% pro.agency.locations.limit(10).each do |loc| %>
 						<li class="program_list_item">
 							<div class="program_name"><%= loc.name %></div>
+							<div class="location_review">
+								<% if loc.reviews.count > 0 %>
+									<div class="program_review">
+										<%= image_tag "Stars-#{loc.reviews.average('review_score').ceil}.png", alt: "" %>
+										<%= link_to pluralize(loc.reviews.count, "review"), reviews_path(prog: pro.id, loc: loc.id) %>
+									</div>
+								<% end %>
+							</div>
 							<%= render "shared/show_address", address: loc  %>
 							<%= link_to "Let's Contact Them", final_workflow_state_path(prog: pro.id, loc: loc.id), class: "btn btn-small btn-primary"%>
 
