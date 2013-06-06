@@ -121,7 +121,7 @@ a#logo.brand {
 
 .container {
   margin: 0;
-  padding: 0 10px;
+  padding: 0 1.25%;
   width: 100%;
 }
 
@@ -131,12 +131,12 @@ a#logo.brand {
 
 
 h3 {
-  margin: 0 -10px 10px -10px;
-  padding: 10px;
+  margin: 0 -1.25% -1.25% -1.25%;
+  padding: 1.25%;
   background-color: #0096E1;
   color: #FFFFFF;
-  font-size: 32pt;
-  line-height: 32pt;
+  font-size: 28pt;
+  line-height: 28pt;
 }
 
 h4 {
@@ -146,7 +146,8 @@ h4 {
 }
 
 h5 {
-  
+  font-size: 14pt;
+  line-height: 14pt;
 }
 
 
@@ -213,10 +214,34 @@ h5 {
   margin-top: 55%;
 }
 
-.program_map {
+#st_program .program_map {
   position: absolute;
-  top: 1.25%;
-  margin: -2.5%;
+  top: 0;
+  margin: 0 -2.5%;
 }
 
+ul.program_lists {
+  margin: 2.5% 0;
+  list-style-type: none;
+}
+
+li.program_list_item {
+  
+}
+
+.program_name {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+
+#st_final .program_map {
+  margin: 2.5% -2.5%
+}
+
+input {
+  width: 95%;
+  height: auto;
+  font-size: 16pt;
+}
 
