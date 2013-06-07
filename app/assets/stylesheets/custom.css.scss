@@ -3,7 +3,16 @@
 body {
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
+  margin: 0;
 }
+
+input, select, textarea {
+  width: 95%;
+  margin: 2.5%;
+  height: auto;
+  font-size: 16pt;
+}
+
 
 
 /* Lena Additions */
@@ -21,6 +30,8 @@ body {
 }
 
 a#logo.brand {
+  position: absolute;
+  top: 0; left: 0;
   width: 284px;
   height: 48px;
   font-size: 0;
@@ -37,7 +48,7 @@ a#logo.brand {
 
 .container {
   margin: 0;
-  padding: 0 1.25%;
+  padding: 0;
   width: 100%;
 }
 
@@ -47,8 +58,8 @@ a#logo.brand {
 
 
 h3 {
-  margin: 0 -1.25% -1.25% -1.25%;
-  padding: 1.25%;
+  margin: 0;
+  padding: 2.5%;
   background-color: #0096E1;
   color: #FFFFFF;
   font-size: 28pt;
@@ -59,22 +70,31 @@ h4 {
   font-weight: normal;
   font-size: 18pt;
   line-height: 18pt;
+  padding: 2.5%;
+  margin: 0;
 }
 
 h5 {
-  font-size: 14pt;
-  line-height: 14pt;
+  font-size: 18pt;
+  line-height: 18pt;
+  margin: 0;
+  padding: 2.5% 0;
+  color: #0096E1;
 }
 
+
+
+/* Workflows (Home Page) */
 
 .wf_list {
   font-size: 0;
-  margin: 2.5% 0;
+  margin: 1.25%;
+  padding: 0;
 }
 
 .wf_list_item {
-  font-size: 16pt; line-height: 16pt;
-  width: 45%;
+  font-size: 16pt; line-height: 0;
+  width: 47.5%;
   margin: 1.25%;
   background-color: #FF8800;
   color: white;
@@ -89,12 +109,17 @@ h5 {
 }
 
 .wf_desc {
+  font-size: 16pt; line-height: 16pt;
   color: white;
   padding: 5%;
   position: absolute;
   width: 90%;
   height: 90%;
   z-index: 2;
+}
+
+.disable .wf_desc {
+  color: #CCC;
 }
 
 .wf_list_item img {
@@ -111,20 +136,28 @@ h5 {
 }
 
 
+/* Button */
 
 .btn {
   padding: 1.25%;
-  margin-bottom: 2.5%;
+  margin: 2.5%;
   font-size: 16pt;
   line-height: 24pt;
   border-radius: 0;
+  color: white;
+  text-align: center;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: none;
   background-color: rgb(57, 204, 0);
+  border: 4px solid #208800;
 }
 
+
+
+/* Programs */
 
 #st_program .row {
   position: relative;
@@ -132,22 +165,30 @@ h5 {
 }
 
 .program_list {
-  margin-top: 55%;
+  position: absolute;
+  margin-top: 50%;
+  padding: 2.5%;
 }
 
 #st_program .program_map {
   position: absolute;
-  top: 0;
-  margin: 0 -2.5%;
+  top: 0; left: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.program_map img {
+  width: 100%;
 }
 
 ul.program_lists {
   margin: 2.5% 0;
   list-style-type: none;
+  padding: 0;
 }
 
 li.program_list_item {
-  
+  margin: 5% 0;
 }
 
 .program_name {
@@ -157,12 +198,36 @@ li.program_list_item {
 
 
 #st_final .program_map {
-  margin: 2.5% -2.5%
+  margin: 2.5% -2.5%;
 }
 
-input {
-  width: 95%;
-  height: auto;
-  font-size: 16pt;
+
+
+/* Reviews */
+
+
+
+/* Encouragement */
+
+.enc {
+  background: #F8F8F8;
+  display: table-row;
+  width: 100%;
 }
+
+.encphoto {
+  padding: 5%;
+  width: 25%;
+  display: table-cell;
+  vertical-align: middle;
+  background: #FDFDFD;
+}
+
+.encdesc {
+  display: table-cell;
+  width: 65%;
+  padding: 5%;
+  vertical-align: middle;
+}
+
 
