@@ -16,8 +16,13 @@
 					<div class='wf_desc'><%= wf.description %></div>
 					<%= image_tag wf.img, alt: "" %>
 				<%	end %>
-				<%= link_to 'Show Workflow', workflow_path(wf), class: "btn btn-small btn-primary" if signed_in? %>
 			</li>
+			<% if signed_in? %>
+				<li>
+				<%= link_to 'Show Workflow', workflow_path(wf), class: "btn btn-small btn-primary" %>
+				<%= link_to 'Edit Workflow', edit_workflow_path(wf), class: "btn btn-small btn-primary" %>
+				</li>
+			<% end %>
 		<% end %>
 	</ul>
 </div>
