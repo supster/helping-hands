@@ -46,7 +46,7 @@ class StatesController < ApplicationController
 
           render "states/programs"
         elsif params[:next_state_id] == "-1"
-          redirect_to root_path
+          redirect_to workflows_path
         else
           redirect_to workflow_state_path @workflow_id, params[:next_state_id]
         end

@@ -39,7 +39,7 @@
 		<% end %>
 	<% elsif @state.action_type.name == "Done" %>
 		<%= link_to "Back", :back, class: "btn btn-large btn-primary btn-back"%>	
-		<%= link_to "Done", root_path, class: "btn btn-medium btn-primary" %>
+		<%= link_to "Done", workflows_path, class: "btn btn-medium btn-primary" %>
 	<% elsif @state.action_type.name == "InputForm" %>
 		<%= form_tag(workflow_state_path(@workflow_id, @state.id), method: "get") do %>
 			<% if @state.form_name == "show_household" %>

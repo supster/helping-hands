@@ -16,11 +16,12 @@ HelpingHands::Application.routes.draw do
   end
   resources :programs
   resources :reviews
-  match "/welcome", to: 'welcome#show'
+  #match "/welcome", to: 'welcome#show'
+  root to: 'welcome#show'
+  #root to: 'workflows#index'
 
   match '/alldone',  to: 'reviews#all_done'
 
-  root to: 'workflows#index'
 
   match '/signup',    to: 'users#new'
   
