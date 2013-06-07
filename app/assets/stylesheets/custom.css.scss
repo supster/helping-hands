@@ -223,6 +223,9 @@ li.program_list_item {
 
 /* Reviews */
 
+.review_item {
+  padding: 5% 0;
+}
 
 
 /* Encouragement */
@@ -374,9 +377,10 @@ button.btn {
 }
 
 #footer {
-  width: 100%;
+  width: 95%;
   margin-left: 0;
   left: 0;
+  padding: 5% 2.5%;
 }
 
 .wf_list_item {
