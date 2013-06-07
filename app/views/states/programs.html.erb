@@ -12,9 +12,11 @@
 				<div><%= link_to "More Information", pro.url, target: "blank" %></div>
 				<% if pro.reviews.count > 0 %>
 					<div class="program_review">
-						<%= image_tag "Stars-#{pro.reviews.average('review_score').ceil}.png", alt: "" %>
-						<%= link_to pluralize(pro.reviews.count, "review"), reviews_path(prog: pro.id) %>
-					</div>
+						<%= link_to reviews_path(prog: pro.id) do %>
+							<%= image_tag "Stars-#{pro.reviews.average('review_score').ceil}.png", alt: "" %>
+							<%= pluralize(pro.reviews.count, "review") %>
+						<% end %>
+					</div>					
 				<% end %>
 				<ul class="program_lists">
 					<% pro.agency.locations.limit(10).each do |loc| %>
@@ -23,8 +25,10 @@
 							<div class="location_review">
 								<% if loc.reviews.count > 0 %>
 									<div class="program_review">
+									<%= link_to reviews_path(prog: pro.id, loc: loc.id) do %>
 										<%= image_tag "Stars-#{loc.reviews.average('review_score').ceil}.png", alt: "" %>
-										<%= link_to pluralize(loc.reviews.count, "review"), reviews_path(prog: pro.id, loc: loc.id) %>
+										<%= pluralize(loc.reviews.count, "review") %>
+									<% end %>
 									</div>
 								<% end %>
 							</div>
