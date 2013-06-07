@@ -1,7 +1,7 @@
 <% provide(:title, "Review " + @program.name)%>
 <div class="row">
 	<h3>Help Other fellows with your review.</h3>
-	<div>How was your experience with <strong><%= @program.name %></strong> at <strong><%= @location.name %></strong>?</div>
+	<h4>How was your experience with <strong><%= @program.name %></strong> at <strong><%= @location.name %></strong>?</h4>
 	<%= render "shared/error", error: @review  %>
 	<div class="span12">
 		<%= form_for @review do |f| %>
@@ -12,7 +12,7 @@
 
 			<%= f.label  :review_score, "Rating (1 = worst, 5 = best)" %>
 			<%= f.select :review_score, options_for_select([[1,1], [2,2], [3,3], [4,4], [5,5]], 5) %>
-			<div>Give other fellows some encouraging thoughts.</div>
+			<h4>Give other fellows some encouraging thoughts.</h4>
 			<%= text_area_tag :encouragement, nil, rows: 2, cols: 10  %><br/>
 					
 			<%= f.submit "Submit Review", class: "btn btn-medium btn-primary" %>

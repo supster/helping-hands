@@ -7,6 +7,9 @@
 
 .btn {
 	display: block;
+}
+
+button.btn {
 	width: 95%;
 }
 
