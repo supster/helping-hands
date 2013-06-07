@@ -294,9 +294,9 @@ li.program_list_item {
   position: absolute;
   top: 0;
   left: 50%;
-  width: 50%;
+  width: 40%;
   height: 100%;
-  vertical-align: center;
+  vertical-align: middle;
   padding: 5%;
 }
 
@@ -318,6 +318,32 @@ li.program_list_item {
 #welcome_logo_medium img {
   width: 100%;
 }
+
+#welcome_header {
+  font-size: 20pt;
+  font-weight: bold;
+  line-height: 20pt;
+  margin: 5% 0;
+}
+
+#welcome_subheader {
+  font-size: 16pt;
+  line-height: 16pt;
+}
+
+#welcome_content .btn {
+  margin: 10% 0;
+  width: 67%;
+}
+
+#welcome_text {
+  display: inline-block;
+  width: 30%;
+  float: left;
+  margin-right: 5%;
+}
+
+
 
 
 /* Responsive */
