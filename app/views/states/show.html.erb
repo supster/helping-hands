@@ -21,8 +21,7 @@
 				<%= image_tag "#{@encouragement.name.downcase}.jpg", alt: "", size: "80x80" %>
 			</div>
 			<div class="span9 encdesc">
-				<%= @encouragement.description %> 
-				- <div class="encname"><%= @encouragement.name %></div>
+				"<%= @encouragement.description %>"<div class="encname"><%= @encouragement.name %></div>
 			</div>
 		</div>
 	<% end %>
