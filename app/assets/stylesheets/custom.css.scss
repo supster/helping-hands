@@ -6,6 +6,13 @@ body {
   margin: 0;
 }
 
+input {
+  width: 95%;
+  height: auto;
+  font-size: 16pt;
+}
+
+
 
 /* Lena Additions */
 
@@ -23,7 +30,7 @@ body {
 
 a#logo.brand {
   position: absolute;
-  top: 0; left: 2.5%;
+  top: 0; left: 0;
   width: 284px;
   height: 48px;
   font-size: 0;
@@ -62,6 +69,7 @@ h4 {
   font-weight: normal;
   font-size: 18pt;
   line-height: 18pt;
+  padding: 2.5%
 }
 
 h5 {
@@ -69,6 +77,9 @@ h5 {
   line-height: 14pt;
 }
 
+
+
+/* Workflows (Home Page) */
 
 .wf_list {
   font-size: 0;
@@ -120,13 +131,15 @@ h5 {
 }
 
 
+/* Button */
 
 .btn {
   padding: 1.25%;
-  margin-bottom: 2.5%;
+  margin: 2.5%;
   font-size: 16pt;
   line-height: 24pt;
   border-radius: 0;
+  color: white;
 }
 
 .btn-primary {
@@ -134,6 +147,9 @@ h5 {
   background-color: rgb(57, 204, 0);
 }
 
+
+
+/* Programs */
 
 #st_program .row {
   position: relative;
@@ -169,9 +185,33 @@ li.program_list_item {
   margin: 2.5% -2.5%
 }
 
-input {
-  width: 95%;
-  height: auto;
-  font-size: 16pt;
+
+
+/* Reviews */
+
+
+
+/* Encouragement */
+
+.enc {
+  background: #F8F8F8;
+  display: table-row;
+  width: 100%;
 }
+
+.enc_photo {
+  padding: 5%;
+  width: 25%;
+  display: table-cell;
+  vertical-align: middle;
+  background: #FDFDFD;
+}
+
+.enc_desc {
+  display: table-cell;
+  width: 65%;
+  padding: 5%;
+  vertical-align: middle;
+}
+
 
