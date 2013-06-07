@@ -1,0 +1,11 @@
+Review for <%= @program.name %> 
+<%= "at #{@location.name}" unless @location.nil? %> 
+<ul class="review_list">
+  <% @reviews.each do |rw| %>
+  <li class="review_item">
+    <%= image_tag "Stars-#{rw.review_score}.png", alt: "" %><br>
+    <%= rw.review_text %><br>
+    <i class="icon-time"></i> <%= rw.created_at %></em>
+  </li>
+  <% end %>
+</ul>
