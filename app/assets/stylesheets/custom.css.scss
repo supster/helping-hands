@@ -319,14 +319,14 @@ li.program_list_item {
   width: 100%;
 }
 
-#welcome_header {
+.welcome_header {
   font-size: 20pt;
   font-weight: bold;
   line-height: 20pt;
   margin: 5% 0;
 }
 
-#welcome_subheader {
+.welcome_subheader {
   font-size: 16pt;
   line-height: 16pt;
 }
@@ -336,7 +336,7 @@ li.program_list_item {
   width: 67%;
 }
 
-#welcome_text {
+.welcome_text {
   display: inline-block;
   width: 30%;
   float: left;
