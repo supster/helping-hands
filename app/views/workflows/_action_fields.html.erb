@@ -1,8 +1,8 @@
-<div class="action_form">
+<div id="edit_action_form">
   <%= f.label :name, "Action"%><%= f.text_field :name %>
   <%= f.label :description %><%= f.text_field :description %>
   <%= f.label :save_attr, "Save attribute" %><%= f.text_field :save_attr %>
-  <%= f.label :next_state_id %><%= f.text_field :next_state_id %> (Value of 0 means it is the last state)
+  <%= f.label :next_state_id %><%= f.text_field :next_state_id %> (0 = call calculate, -1 = go back to main)
   <%= f.label :order_no, "Order number" %><%= f.text_field :order_no %>
   <%= f.link_to_remove "remove action", class: "btn btn-small btn-danger"  %>
 </div>

@@ -1,4 +1,24 @@
 <% provide(:title, 'Edit Workflow')%>  
+<% content_for :head do %>
+<style type="text/css">
+	input, select, textarea {
+	  font-size: 11pt;
+	}	
+	#edit_wf_form {
+	  border: 1px solid black;
+	  padding: 1%;
+	}
+	#edit_st_form {
+	  border: 1px solid black;
+	  padding-left: 5%;		
+	}
+	#edit_action_form {
+	  border: 1px solid black;
+	  padding-left: 7%;		
+	}
+</style>
+<% end %>
+
 <div>
 	<%= render 'form' %>
 </div>
