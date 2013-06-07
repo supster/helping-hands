@@ -6,8 +6,9 @@ body {
   margin: 0;
 }
 
-input {
+input, select, textarea {
   width: 95%;
+  margin: 2.5%;
   height: auto;
   font-size: 16pt;
 }
@@ -70,11 +71,15 @@ h4 {
   font-size: 18pt;
   line-height: 18pt;
   padding: 2.5%
+  margin: 0;
 }
 
 h5 {
-  font-size: 14pt;
-  line-height: 14pt;
+  font-size: 18pt;
+  line-height: 18pt;
+  margin: 0;
+  padding: 2.5% 0;
+  color: #0096E1;
 }
 
 
@@ -140,11 +145,14 @@ h5 {
   line-height: 24pt;
   border-radius: 0;
   color: white;
+  text-align: center;
+  text-decoration: none;
 }
 
 .btn-primary {
   background: none;
   background-color: rgb(57, 204, 0);
+  border: 4px solid #208800;
 }
 
 
@@ -157,22 +165,30 @@ h5 {
 }
 
 .program_list {
-  margin-top: 55%;
+  position: absolute;
+  margin-top: 50%;
+  padding: 2.5%;
 }
 
 #st_program .program_map {
   position: absolute;
-  top: 0;
-  margin: 0 -2.5%;
+  top: 0; left: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.program_map img {
+  width: 100%;
 }
 
 ul.program_lists {
   margin: 2.5% 0;
   list-style-type: none;
+  padding: 0;
 }
 
 li.program_list_item {
-  
+  margin: 5% 0;
 }
 
 .program_name {
@@ -199,7 +215,7 @@ li.program_list_item {
   width: 100%;
 }
 
-.enc_photo {
+.encphoto {
   padding: 5%;
   width: 25%;
   display: table-cell;
@@ -207,7 +223,7 @@ li.program_list_item {
   background: #FDFDFD;
 }
 
-.enc_desc {
+.encdesc {
   display: table-cell;
   width: 65%;
   padding: 5%;
