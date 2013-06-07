@@ -68,6 +68,14 @@ a#logo.brand {
   padding: 0;
 }
 
+#footer {
+  width: 920px;
+  left: 50%;
+  position: relative;
+  margin-left: -460px;
+  font-size: 10pt;
+}
+
 
 h3 {
   margin: 0;
@@ -270,6 +278,27 @@ li.program_list_item {
 }
 
 
+/* Welcome */
+
+#welcome_hero {
+  background: url('/assets/hero-image.jpg') no-repeat center center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+}
+
+#welcome_content {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%:
+  height: 100%;
+  vertical-align: center;
+}
+
 
 /* Responsive */
 
@@ -296,6 +325,12 @@ button.btn {
 }
 
 .navbar {
+  width: 100%;
+  margin-left: 0;
+  left: 0;
+}
+
+#footer {
   width: 100%;
   margin-left: 0;
   left: 0;
