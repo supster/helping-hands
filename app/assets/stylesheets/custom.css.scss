@@ -302,7 +302,7 @@ li.program_list_item {
 
 #welcome_logo_large {
   position: relative;
-  width: 30%;
+  width: 60%;
 }
 
 #welcome_logo_large img {
@@ -338,9 +338,13 @@ li.program_list_item {
 
 .welcome_text {
   display: inline-block;
-  width: 30%;
+  width: 28%;
   float: left;
   margin-right: 5%;
+}
+
+.welcome_text h4 {
+  padding: 10% 0;
 }
 
 
@@ -402,6 +406,34 @@ input, select, textarea {
   width: 47.5%;
 }
 
+#welcome_hero {
+  width: 100%;
+    height: 50%;
+    position: relative;
+}
+
+#welcome_content {
+  position: relative;
+    width: 90%;
+    left: 0;
+}
+
+#welcome_logo_large {
+  display: none;
+}
+
+#welcome_logo_medium {
+  display: inline;
+}
+
+#welcome_content .btn {
+  width: 95%;
+}
+
+.welcome_text {
+  float: none;
+  width: 95%
+}
 
 
 }
