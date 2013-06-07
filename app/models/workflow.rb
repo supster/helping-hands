@@ -1,5 +1,5 @@
 class Workflow < ActiveRecord::Base
-  attr_accessible :name, :description, :start_state_id, :area_id, :service_id
+  attr_accessible :name, :description, :start_state_id, :area_id, :service_id, :img
   attr_accessible :states_attributes
   belongs_to :area
   has_many :states, dependent: :destroy
