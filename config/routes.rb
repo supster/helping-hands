@@ -16,6 +16,7 @@ HelpingHands::Application.routes.draw do
   end
   resources :programs
   resources :reviews
+  match "/welcome", to: 'welcome#show'
 
   match '/alldone',  to: 'reviews#all_done'
 

@@ -4,4 +4,7 @@ class WelcomeController < ApplicationController
   	@area = Area.all	
   end
 
+  def show
+  	
+  end
 end
