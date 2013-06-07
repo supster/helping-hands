@@ -54,8 +54,8 @@
 		</div>
 		<script type="text/javascript"> 
 		  $(function() { 
-		  	$('#img_map').attr('src',"<%= @url %>"); 
-		  });
+		  	$('#img_map').attr('src', String("<%= @url %>").replace(/&amp;/g, "&")); 
+		  }); 
 		</script>					
 	<% end %>
 </div>
