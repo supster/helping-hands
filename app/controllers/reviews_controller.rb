@@ -8,12 +8,15 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(params[:review])
-    @review.program_id = params[:program_id]
-    @review.location_id = params[:location_id]
+    @review.program_id = params[:prog]
+    @review.location_id = params[:loc]
+
     if @review.save
       flash[:success] = "Review posted!  Thank you!"
-      redirect_to root_path
+      redirect_to alldone_path(prog: params[:prog])
     else
+  	  @program = Program.find(params[:prog])
+  	  @location = Location.find(params[:loc])
       render "new"
     end  	
   end
@@ -26,5 +29,9 @@ class ReviewsController < ApplicationController
   		@location = Location.find(params[:loc]) 
   		@reviews = @program.agency.locations.find_by_id(params[:loc]).reviews
   	end
+  end
+
+  def all_done  
+  	@program = Program.find(params[:prog])    	
   end
 end

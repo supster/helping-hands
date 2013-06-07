@@ -5,8 +5,8 @@
 	<%= render "shared/error", error: @review  %>
 	<div class="span12">
 		<%= form_for @review do |f| %>
-			<%= hidden_field_tag :program_id, @program.id %>
-			<%= hidden_field_tag :location_id, @location.id %>
+			<%= hidden_field_tag :prog, @program.id %>
+			<%= hidden_field_tag :loc, @location.id %>
 	
 			<%= f.text_area :review_text, rows: 3, cols: 10 %>
 
@@ -16,7 +16,7 @@
 			<%= text_area_tag :encouragement, nil, rows: 2, cols: 10  %><br/>
 					
 			<%= f.submit "Submit Review", class: "btn btn-medium btn-primary" %>
-			<%= link_to "Not Right Now", root_path, class: "btn btn-medium btn-primary" %>
+			<%= link_to "Not Right Now", alldone_path(prog: @program.id), class: "btn btn-medium btn-primary" %>
 		<% end %>
 	</div>
 </div>

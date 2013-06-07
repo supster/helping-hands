@@ -14,6 +14,7 @@
 /log/*.log
 /tmp
 .gitkeep
+.DS_Store
 
 # data that hasn't been cleaned
 /lib/tasks/staging

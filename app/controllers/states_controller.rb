@@ -64,7 +64,6 @@ class StatesController < ApplicationController
   end
 
   def end_wf
+  
   end
-
-
 end

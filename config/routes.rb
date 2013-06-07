@@ -17,6 +17,8 @@ HelpingHands::Application.routes.draw do
   resources :programs
   resources :reviews
 
+  match '/alldone',  to: 'reviews#all_done'
+
   root to: 'workflows#index'
 
   match '/signup',    to: 'users#new'
