@@ -201,6 +201,9 @@ li.program_list_item {
   margin: 2.5% -2.5%;
 }
 
+#st_final .row-fluid {
+  padding: 2.5%;
+}
 
 
 /* Reviews */
@@ -231,3 +234,23 @@ li.program_list_item {
 }
 
 
+/* All Done */
+
+#all_done {
+  background: #0090FF;
+    color: white;
+    padding: 2.5%;
+}
+
+.all_done_text {
+  font-size: 20pt;
+    margin-bottom: 5%;
+}
+
+.img_all_done {
+  width: 100%
+}
+
+#all_done .btn {
+  margin-left: 0;
+}
