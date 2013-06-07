@@ -8,8 +8,14 @@
 	}
 
 	function take_value(nextStateID, saveAttribute){
-		$("#next_state_id").val(nextStateID);
-		$("#save").val(saveAttribute + $("#input_value").val());
+		if($("#input_value").val().trim() == ""){
+			alert('Value cannot be blank');
+			return false;
+		}else{
+			$("#next_state_id").val(nextStateID);
+			$("#save").val(saveAttribute + $("#input_value").val());
+			return true;
+		}
 	}
 </script>
 <% end %>
@@ -50,7 +56,7 @@
 			<%= hidden_field_tag "save" %>
 			<%= hidden_field_tag "next_state_id" %>
 			<%= button_tag "Next", name: "action_id", value: @actions.first.id, 
-							onclick: "take_value('#{@actions.first.next_state_id}','#{@actions.first.save_attr}');",
+							onclick: "return take_value('#{@actions.first.next_state_id}','#{@actions.first.save_attr}');",
 							class: "btn btn-medium btn btn-primary" if @actions.count > 0 %>
 		<% end %>
 	<% elsif @state.action_type.name == "FAQ" %>
