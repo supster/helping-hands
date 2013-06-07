@@ -281,29 +281,6 @@ li.program_list_item {
 
 
 
-/* Welcome */
-
-#welcome_hero {
-  background: url('/assets/hero-image.jpg') no-repeat center center;
-  background-size: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 100%;
-}
-
-#welcome_content {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 50%:
-  height: 100%;
-  vertical-align: center;
-}
-
-
-
 /* Responsive */
 
 @media (max-width: 767px)
