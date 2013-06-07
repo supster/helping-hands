@@ -69,6 +69,16 @@ a#logo.brand {
 }
 
 
+#footer {
+  width: 920px;
+  left: 50%;
+  position: relative;
+  margin-left: -460px;
+  font-size: 10pt;
+}
+
+
+
 h3 {
   margin: 0;
   padding: 2.5%;
@@ -309,6 +319,12 @@ button.btn {
 body {
   width: 100%;
   margin: 0;
+}
+
+#footer {
+  width: 100%
+  margin-left: 0;
+  left: 0;
 }
 
 input, select, textarea {
