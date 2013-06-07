@@ -297,6 +297,26 @@ li.program_list_item {
   width: 50%;
   height: 100%;
   vertical-align: center;
+  padding: 5%;
+}
+
+#welcome_logo_large {
+  position: relative;
+  width: 30%;
+}
+
+#welcome_logo_large img {
+  width: 100%;
+}
+
+#welcome_logo_medium {
+  position: relative;
+  width: 90%;
+  display: none;
+}
+
+#welcome_logo_medium img {
+  width: 100%;
 }
 
 
