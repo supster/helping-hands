@@ -16,12 +16,13 @@
 <div id="st_show">
 	<h3><%= @workflow.name %></h3>
 	<% if !@encouragement.nil? %>
-		<div class="row-fluid">
-			<div class="span3 offset1">
+		<div class="row-fluid enc">
+			<div class="span3 encphoto">
 				<%= image_tag "#{@encouragement.name.downcase}.jpg", alt: "", size: "80x80" %>
 			</div>
-			<div class="span8">
-				<%= @encouragement.description %> - <%= @encouragement.name %>
+			<div class="span9 encdesc">
+				<%= @encouragement.description %> 
+				- <div class="encname"><%= @encouragement.name %></div>
 			</div>
 		</div>
 	<% end %>
