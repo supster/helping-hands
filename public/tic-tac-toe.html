@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+	<title>Tic Tac Toe</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<style type="text/css">
+		.tblBoard {
+			background-color: #FFCCCC;
+			border-spacing: 0;
+		}
+
+		.tblBoard td {
+			border: 1px dashed black;
+			width: 80px;
+			height: 80px;
+			font-size: xx-large;
+			padding: 10px 10px 10px 10px;
+			text-align: center;
+		}
+
+		.tblBoard td:hover {
+			background-color: red;
+			cursor: pointer;
+		}
+
+	</style>
+
+	<script type="text/javascript">
+		/*********** Board ***************/
+		function Board() {
+			/* Board contain 2 dimension array */
+			this.boxCount = 0;
+			this.finished = false;
+			this.board = new Array(3); //create array of 3 element
+			for (i=0; i<3; i++){
+				this.board[i] = ["", "", ""];
+			}
+		}
+
+		Board.prototype.mark = function(x, y, symbol){
+			if(this.board[x][y] == "") {
+				this.board[x][y] = symbol;
+				this.boxCount++;
+
+			}else{
+				alert("The box is already checked.");
+			}
+		}
+
+		Board.prototype.clear = function(){
+			for(i=0;i<3;i++){
+				for(j=0;j<3;j++){
+					this.board[i][j] = "";
+				}
+			}
+			this.boxCount = 0;
+			this.finished = false;
+		}
+
+		Board.prototype.status = function(x, y, symbol){
+			//check winning
+			tMatch = false;
+			for(i=0;i<3;i++){
+				if(this.board[x][i] == symbol){
+					tMatch = true;
+				}else{
+					tMatch = false;
+					break;
+				}
+			}
+
+			if(tMatch) return true;
+
+			for(i=0;i<3;i++){
+				if(this.board[i][y] == symbol){
+					tMatch = true;
+				}else{
+					tMatch = false;
+					break;
+				}				
+			}
+
+			if(tMatch) return true;
+
+			//cross cases
+			if(x == y) {
+				for(i=0;i<3;i++){
+					if(this.board[i][i] == symbol){
+						tMatch = true;
+					}else{
+						tMatch = false;
+						break;
+					}
+				}
+
+				//case of 1x1, I have to check 2x0 and 0x2 as well
+				if(x == 1) {
+					if(this.board[0][2] == symbol && this.board[2][0] == symbol) {
+						tMatch = true;
+					}else{
+						tMatch = false;
+					}					
+				}
+
+			}
+
+			if(tMatch) return true;
+
+			//case of 0x2 and 2x0
+			if((x + y) == 2 && x != 1) {
+				for(i=0;i<3;i++){
+					if(this.board[Math.abs(x-i)][Math.abs(y+i)] == symbol){
+						tMatch = true;
+					}else{
+						return false;
+					}
+				}
+			}
+
+			if(tMatch) return true;
+
+			return false;
+
+		}
+
+		/*********** Player ***************/
+		function Player(type, symbol) {
+			this.type = type; // human or computer
+			this.symbol = symbol; // X or O
+		}
+
+		Player.prototype.play = function(x, y, oBoard) {
+			if(oBoard.boxCount < 9) {
+				if(x == null) {
+					//random number between 0 and 2
+					do {
+						x = Math.floor(Math.random() * 3);
+						y = Math.floor(Math.random() * 3);
+					} while (oBoard.board[x][y] != "");
+				}
+
+				oBoard.mark(x, y, this.symbol);
+
+				return [x, y];				
+			}else{
+				alert("Game Finished with a draw!");
+				oBoard.finished = true;
+			}
+		}
+
+		var oBoard = new Board();
+		var oPlayer = new Player("human", "X");
+		var oComputer = new Player("computer", "O");
+
+		function clearBoard(){
+			oBoard.clear();
+			$("td").text("");
+		}
+
+
+		$(function() {
+
+			//click event handler
+			$("td").click(function(){
+
+				if(!oBoard.finished){
+					//Human click
+					aXY = this.id.split("x");
+					x = parseInt(aXY[0]);
+					y = parseInt(aXY[1]);
+
+					oPlayer.play(x, y, oBoard);
+					$(this).text(oPlayer.symbol);	
+
+					if(oBoard.status(x, y, oPlayer.symbol)){
+						alert("You won!");
+						oBoard.finished = true;
+						return;
+					};
+
+
+					//generate a box for computer
+					var aXY = oComputer.play(null, null, oBoard);	//Computer random
+					$("#" + aXY[0] + "x" + aXY[1]).text(oComputer.symbol);	
+
+					if(oBoard.status(x, y, oComputer.symbol)){
+						alert("Computer won!");
+						oBoard.finished = true;
+						return;
+					};
+				}else{
+					alert("Please clear game.")
+				}
+
+			})
+		})
+
+	</script>
+	</head>
+	<body>
+	<h1>Tic Tac Toe</h1>
+		<table class="tblBoard">
+			<tr><td id="0x0"></td><td id="1x0"></td><td id="2x0"></td></tr>
+			<tr><td id="0x1"></td><td id="1x1"></td><td id="2x1"></td></tr>
+			<tr><td id="0x2"></td><td id="1x2"></td><td id="2x2"></td></tr>
+		</table>
+		<input type="button" value="Clear Board" id="btnClear" onclick="clearBoard();">		
+	</body>
+</html>
