@@ -93,28 +93,36 @@
 						break;
 					}
 				}
-
-				//case of 1x1, I have to check 2x0 and 0x2 as well
-				if(x == 1) {
-					if(this.board[0][2] == symbol && this.board[2][0] == symbol) {
-						tMatch = true;
-					}else{
-						tMatch = false;
-					}					
-				}
-
 			}
 
 			if(tMatch) return true;
 
-			//case of 0x2 and 2x0
-			if((x + y) == 2 && x != 1) {
-				for(i=0;i<3;i++){
-					if(this.board[Math.abs(x-i)][Math.abs(y+i)] == symbol){
-						tMatch = true;
-					}else{
-						return false;
-					}
+			if((x + y) == 2) {
+				switch (x){
+					case 0:
+						//case of 0x2, I have to check 1x1 and 2x0
+						if(this.board[1][1] == symbol && this.board[2][0] == symbol) {
+							tMatch = true;
+						}else{
+							tMatch = false;
+						}					
+						break;
+					case 1:
+						//case of 1x1, I have to check 2x0 and 0x2
+						if(this.board[0][2] == symbol && this.board[2][0] == symbol) {
+							tMatch = true;
+						}else{
+							tMatch = false;
+						}					
+						break;
+					case 2:
+						//case of 2x0, I have to check 1x1 and 0x2
+						if(this.board[1][1] == symbol && this.board[0][2] == symbol) {
+							tMatch = true;
+						}else{
+							tMatch = false;
+						}					
+						break;
 				}
 			}
 
