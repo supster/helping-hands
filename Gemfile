@@ -8,7 +8,7 @@ gem 'rails', '3.2.13'
 #gem 'sqlite3'
 gem 'bootstrap-sass', '2.1'
 gem 'jquery-rails'
-gem 'gmaps4rails'
+gem 'gmaps4rails', '1.5.6'
 gem 'nested_form'
 
 group :development, :test do
@@ -34,7 +34,7 @@ group :test do
   gem 'cucumber-rails', '1.2.1', :require => false
   gem 'database_cleaner', '0.7.0'
   # gem 'launchy', '2.1.0'
-  gem 'rb-fsevent', '0.9.1', :require => false
+  # gem 'rb-fsevent', '0.9.1', :require => false
   # gem 'growl', '1.0.3'
 end
 
