@@ -165,30 +165,34 @@
 			$("td").click(function(){
 
 				if(!oBoard.finished){
-					//Human click
-					aXY = this.id.split("x");
-					x = parseInt(aXY[0]);
-					y = parseInt(aXY[1]);
+					if(this.innerText != ""){
+						alert("The box is already checked.");
+					}else{
+						//Human click
+						aXY = this.id.split("x");
+						x = parseInt(aXY[0]);
+						y = parseInt(aXY[1]);
 
-					oPlayer.play(x, y, oBoard);
-					$(this).text(oPlayer.symbol);	
+						this.innerText = oPlayer.symbol;	
+						oPlayer.play(x, y, oBoard);
 
-					if(oBoard.status(x, y, oPlayer.symbol)){
-						alert("You won!");
-						oBoard.finished = true;
-						return;
-					};
+						if(oBoard.status(x, y, oPlayer.symbol)){
+							alert("You won!");
+							oBoard.finished = true;
+							return;
+						};
 
 
-					//generate a box for computer
-					var aXY = oComputer.play(null, null, oBoard);	//Computer random
-					$("#" + aXY[0] + "x" + aXY[1]).text(oComputer.symbol);	
+						//generate a box for computer
+						var aXY = oComputer.play(null, null, oBoard);	//Computer random
+						$("#" + aXY[0] + "x" + aXY[1]).text(oComputer.symbol);	
 
-					if(oBoard.status(x, y, oComputer.symbol)){
-						alert("Computer won!");
-						oBoard.finished = true;
-						return;
-					};
+						if(oBoard.status(x, y, oComputer.symbol)){
+							alert("Computer won!");
+							oBoard.finished = true;
+							return;
+						};
+					}
 				}else{
 					alert("Please clear game.")
 				}
