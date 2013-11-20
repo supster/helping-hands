@@ -192,8 +192,10 @@
 
 
 						//generate a box for computer
-						var aXY = oComputer.play(null, null, oBoard);	//Computer random
-						$("#" + aXY[0] + "x" + aXY[1]).text(oComputer.symbol);	
+						aXY = oComputer.play(null, null, oBoard);	//Computer random
+						x = aXY[0];
+						y = aXY[1];
+						$("#" + x + "x" + y).text(oComputer.symbol);	
 
 						if(oBoard.status(x, y, oComputer.symbol)){
 							alert("Computer won!");
